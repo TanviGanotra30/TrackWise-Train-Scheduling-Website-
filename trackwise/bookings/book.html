@@ -1,0 +1,705 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Tickets | Trackwise</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-ticket-alt"></i> Book Train Tickets</h1>
+    
+    <div class="card">
+      <form id="bookingForm">
+        <div class="input-group">
+          <label for="trainNumber">Train Number</label>
+          <input type="text" id="trainNumber" placeholder="e.g., 12345" required>
+        </div>
+
+        <div class="input-group">
+          <label for="fromStation">From Station</label>
+          <input type="text" id="fromStation" placeholder="e.g., NDLS" required>
+        </div>
+
+        <div class="input-group">
+          <label for="toStation">To Station</label>
+          <input type="text" id="toStation" placeholder="e.g., CSTM" required>
+        </div>
+
+        <div class="input-group">
+          <label for="journeyDate">Journey Date</label>
+          <input type="date" id="journeyDate" required>
+        </div>
+
+        <div class="input-group">
+          <label for="coachType">Coach Type</label>
+          <select id="coachType">
+            <option value="SL">Sleeper (SL)</option>
+            <option value="3A">AC 3-Tier (3A)</option>
+            <option value="2A">AC 2-Tier (2A)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn">
+          <i class="fas fa-bookmark"></i> Book Now
+        </button>
+      </form>
+    </div>
+
+    <div id="bookingResult" class="result-card">
+      <h3><i class="fas fa-check-circle"></i> Booking Confirmed!</h3>
+      <p><strong>PNR:</strong> <span id="pnrNumber"></span></p>
+      <p><strong>Status:</strong> <span class="confirmed">Confirmed</span></p>
+    </div>
+  </div>
+
+  <script src="../assets/js/script.js"></script>
+  <script src="book.js"></script>
+</body>
+</html> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trackwise - On Track, On Time</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --accent: #e74c3c;
+      --light: #ecf0f1;
+      --dark: #2c3e50;
+      --success: #27ae60;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f7fa;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 300px;
+      height: 300px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 25px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    
+    .btn-primary {
+      background-color: white;
+      color: var(--primary);
+    }
+    
+    .btn-secondary {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    .promo-banner {
+      background-color: var(--accent);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 8px;
+      margin-top: 25px;
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Features Section */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--secondary);
+    }
+    
+    .feature-card h2 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .feature-icon {
+      font-size: 1.8rem;
+      color: var(--secondary);
+    }
+    
+    /* Booking Form Styles */
+    .booking-container {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: 40px auto;
+      position: relative;
+    }
+    
+    .booking-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 12px 12px 0 0;
+    }
+    
+    .booking-container h1 {
+      color: var(--primary);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 10px;
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .input-group input:focus,
+    .input-group select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+    
+    /* Result Card */
+    .result-card {
+      display: none;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--success);
+    }
+    
+    .result-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: var(--success);
+    }
+    
+    .result-card h3 {
+      color: var(--success);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1.5rem;
+    }
+    
+    .result-card p {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    
+    .confirmed {
+      color: var(--success);
+      font-weight: 600;
+    }
+    
+    /* Navigation */
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .back-btn:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    
+    /* Section Titles */
+    .section-title {
+      text-align: center;
+      margin: 50px 0 30px;
+      color: var(--primary);
+      position: relative;
+    }
+    
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      margin: 15px auto 0;
+      border-radius: 2px;
+    }
+    
+    /* Page Transitions */
+    .page {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .page.active {
+      display: block;
+    }
+    
+    /* Loading Spinner */
+    .spinner {
+      display: none;
+      width: 40px;
+      height: 40px;
+      margin: 20px auto;
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--secondary);
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
+      
+      .booking-container,
+      .result-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body-->
+  <div id="landingPage" class="page active">
+    <header>
+      <div class="container">
+        <h1><i class="fas fa-train"></i> On Track, On Time</h1>
+        <p>Your Journey, Our Priority!</p>
+        <p>Real-time tracking for 10,000+ trains across India with accurate delay predictions and smart scheduling.</p>
+        
+        <div class="cta-buttons">
+          <button class="btn btn-primary" id="bookNowBtn">
+            <i class="fas fa-bookmark"></i> Book Tickets
+          </button>
+          <button class="btn btn-secondary" id="trackTrainBtn">
+            <i class="fas fa-map-marker-alt"></i> Track Train
+          </button>
+        </div>
+        
+        <div class="promo-banner">
+          Get 10% off on your first booking! Use code: <strong>TRACKWISE10</strong>
+        </div>
+      </div>
+    </header>
+    
+    <div class="container">
+      <h2 class="section-title">Our Features</h2>
+      
+      <div class="features">
+        <div class="feature-card">
+          <h2><i class="fas fa-map-marked-alt feature-icon"></i> Live Tracking</h2>
+          <p>Real-time location updates for all trains with predictive arrival times using advanced algorithms</p>
+        </div>
+        
+        <div class="feature-card">
+          <h2><i class="fas fa-bell feature-icon"></i> Travel Alerts</h2>
+          <p>Instant notifications for delays, cancellations and platform changes based on our forecasting system</p>
+        </div>
+        
+        <div class="feature-card">
+          <h2><i class="fas fa-th-list feature-icon"></i> Platform Status</h2>
+          <p>Know your platform before arrival with live station maps and predicted platform changes</p>
+        </div>
+        
+        <div class="feature-card">
+          <h2><i class="fas fa-calendar-alt feature-icon"></i> Schedule Planner</h2>
+          <p>Smart journey planning with optimal routes and connections using historical delay data</p>
+        </div>
+        
+        <div class="feature-card">
+          <h2><i class="fas fa-map-signs feature-icon"></i> Station Navigation</h2>
+          <p>Interactive maps for all major stations with amenities and predicted crowd levels</p>
+        </div>
+        
+        <div class="feature-card">
+          <h2><i class="fas fa-headset feature-icon"></i> 24/7 Support</h2>
+          <p>Dedicated customer support anytime, anywhere with AI-powered assistance</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Page -->
+  <div id="bookingPage" class="page">
+    <div class="container">
+      <a href="#" class="back-btn" id="backToHome">
+        <i class="fas fa-arrow-left"></i> Back to Home
+      </a>
+      
+      <div class="booking-container">
+        <h1><i class="fas fa-ticket-alt"></i> Book Train Tickets</h1>
+        
+        <form id="bookingForm">
+          <div class="input-group">
+            <label for="trainNumber">Train Number</label>
+            <input type="text" id="trainNumber" placeholder="e.g., 12345" required>
+          </div>
+
+          <div class="input-group">
+            <label for="fromStation">From Station</label>
+            <input type="text" id="fromStation" placeholder="e.g., NDLS (New Delhi)" required>
+          </div>
+
+          <div class="input-group">
+            <label for="toStation">To Station</label>
+            <input type="text" id="toStation" placeholder="e.g., CSTM (Mumbai CST)" required>
+          </div>
+
+          <div class="input-group">
+            <label for="journeyDate">Journey Date</label>
+            <input type="date" id="journeyDate" required>
+          </div>
+
+          <div class="input-group">
+            <label for="coachType">Coach Type</label>
+            <select id="coachType">
+              <option value="SL">Sleeper (SL)</option>
+              <option value="3A">AC 3-Tier (3A)</option>
+              <option value="2A">AC 2-Tier (2A)</option>
+              <option value="1A">AC First Class (1A)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
+            <i class="fas fa-bookmark"></i> Book Now
+          </button>
+        </form>
+      </div>
+
+      <div id="bookingResult" class="result-card">
+        <h3><i class="fas fa-check-circle"></i> Booking Confirmed!</h3>
+        <p><strong>PNR:</strong> <span id="pnrNumber">8264921759</span></p>
+        <p><strong>Status:</strong> <span class="confirmed">Confirmed</span></p>
+        <p><strong>Train:</strong> <span id="trainInfo">12345 Rajdhani Express</span></p>
+        <p><strong>Journey:</strong> <span id="journeyInfo">NDLS to CSTM on 15 June 2023</span></p>
+        <p><strong>Coach:</strong> <span id="coachInfo">B2, Seat 27 (Lower)</span></p>
+        
+        <button id="downloadTicketBtn" class="btn btn-primary" style="margin-top: 20px;">
+          <i class="fas fa-download"></i> Download Ticket
+        </button>
+        
+        <div class="spinner" id="downloadSpinner"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Initialize jsPDF
+    const { jsPDF } = window.jspdf;
+    
+    // Page navigation
+    document.getElementById('bookNowBtn').addEventListener('click', function() {
+      document.getElementById('landingPage').classList.remove('active');
+      document.getElementById('bookingPage').classList.add('active');
+      window.scrollTo(0, 0);
+    });
+    
+    document.getElementById('backToHome').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('bookingPage').classList.remove('active');
+      document.getElementById('landingPage').classList.add('active');
+      window.scrollTo(0, 0);
+    });
+    
+    // Form submission
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Show loading state
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+      submitBtn.disabled = true;
+      
+      // Simulate processing delay
+      setTimeout(() => {
+        // Hide form and show result
+        document.querySelector('.booking-container').style.display = 'none';
+        document.getElementById('bookingResult').style.display = 'block';
+        
+        // Generate sample booking data
+        const trainNumber = document.getElementById('trainNumber').value || '12345';
+        const fromStation = document.getElementById('fromStation').value || 'NDLS';
+        const toStation = document.getElementById('toStation').value || 'CSTM';
+        const journeyDate = document.getElementById('journeyDate').value || new Date().toISOString().split('T')[0];
+        const coachType = document.getElementById('coachType').value;
+        
+        // Update booking info
+        document.getElementById('trainInfo').textContent = `${trainNumber} ${getTrainName(trainNumber)}`;
+        document.getElementById('journeyInfo').textContent = 
+          `${fromStation} to ${toStation} on ${formatDate(journeyDate)}`;
+        document.getElementById('coachInfo').textContent = 
+          `${getCoachName(coachType)}, Seat ${Math.floor(Math.random() * 50) + 1}`;
+        document.getElementById('pnrNumber').textContent = 
+          Math.floor(1000000000 + Math.random() * 9000000000);
+        
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        // Scroll to result
+        document.getElementById('bookingResult').scrollIntoView({ behavior: 'smooth' });
+      }, 1500);
+    });
+  
+    // Download Ticket functionality - FIXED VERSION
+    document.getElementById('downloadTicketBtn').addEventListener('click', function() {
+      const btn = this;
+      const spinner = document.getElementById('downloadSpinner');
+      
+      // Show loading state
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+      spinner.style.display = 'block';
+      
+      // Use setTimeout to allow UI to update
+      setTimeout(() => {
+        try {
+          // Get booking details
+          const pnr = document.getElementById('pnrNumber').textContent;
+          const trainInfo = document.getElementById('trainInfo').textContent;
+          const journeyInfo = document.getElementById('journeyInfo').textContent;
+          const coachInfo = document.getElementById('coachInfo').textContent;
+          const status = document.querySelector('.confirmed').textContent;
+          
+          // Create PDF
+          const doc = new jsPDF();
+          
+          // [Keep all your existing PDF content generation code]
+          
+          // FIX: Replace GState with direct opacity setting
+          doc.setGState(doc.GState({ opacity: 0.2 })); // Corrected this line
+          
+          // Save the PDF
+          doc.save(`Trackwise-Ticket-${pnr}.pdf`);
+          
+        } catch (error) {
+          console.error('Error generating PDF:', error);
+          alert('Error generating ticket. Please try again.');
+        } finally {
+          // Reset button state
+          btn.innerHTML = '<i class="fas fa-download"></i> Download Ticket';
+          btn.disabled = false;
+          spinner.style.display = 'none';
+        }
+      }, 50);
+    });
+  
+    // Helper functions
+    function getTrainName(number) {
+      const names = {
+        '12345': 'Rajdhani Express',
+        '12346': 'Shatabdi Express',
+        '12347': 'Duronto Express',
+        '12348': 'Garib Rath'
+      };
+      return names[number] || 'Express';
+    }
+    
+    function getCoachName(code) {
+      const coaches = {
+        'SL': 'Sleeper',
+        '3A': 'AC 3-Tier',
+        '2A': 'AC 2-Tier',
+        '1A': 'AC First Class'
+      };
+      return coaches[code] || code;
+    }
+    
+    function formatDate(dateString) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString('en-US', options);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background-size: 200% 200%;
+      animation: bgShift 10s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .signup-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 2rem 2rem;
+      width: 90%;
+      max-width: 380px;  /* Smaller width */
+      color: #fff;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+      z-index: 2;
+    }
+
+    .signup-card::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent);
+      animation: floatGlow 6s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .signup-card h2 {
+      text-align: center;
+      font-size: 1.8rem;  /* Smaller title */
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      border-radius: 12px;
+      border: none;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.02);
+      box-shadow: 0 0 5px rgba(246, 201, 14, 0.4);
+    }
+
+    .form-group input::placeholder {
+      color: #ccc;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, #f6c90e, #ffdd00);
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #111;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #ffdd00, #f4b400);
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    .footer a {
+      color: #f6c90e;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .signup-card {
+        padding: 1.8rem 1.4rem;
+      }
+      .signup-card h2 {
+        font-size: 1.6rem;
+      }
+    }
+
+    #img1{
+        height: 85px;
+        width: 85px;
+
+    }
+    .cont{
+        display: flex;
+    }
+
+    #tr{
+        padding-top: 20px;
+    }
+
+    #signupForm{
+        height: 410px;
+        margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-card">
+    <div class="cont">
+        <img src="\trackwise\train.png" id="img1">
+    <h1 id="tr">TRACKWISE</h1>
+</div>
+    <form id="signupForm" action="signup.php" method="POST">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter phone number" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Minimum 6 characters" required>
+      </div>
+      <button type="submit" class="btn-submit">Create Account</button>
+    
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("signupForm");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const password = document.getElementById("password").value;
+
+      if (!name || !email || !phone || !password) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters.");
+        return;
+      }
+
+      alert("🎉 Successfully Signed Up!!, " + name + "!");
+      form.reset();
+    });
+  </script>
+</body>
+</html>

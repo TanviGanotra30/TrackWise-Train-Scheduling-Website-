@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover - Trackwise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+    <style>
+        /* Dark Mode Variables */
+        :root {
+            --dark-bg: #0f0e17;         /* Deep navy blue */
+            --dark-card: #1a1a2e;       /* Slightly lighter navy */
+            --dark-text: #fffffe;       /* Bright white for text */
+            --dark-primary: #7f5af0;    /* Vibrant purple */
+            --dark-primary-light: #a78bfa; /* Lighter purple */
+            --dark-secondary: #2cb67d;  /* Teal green */
+            --dark-accent1: #ff8ba7;    /* Pink accent */
+            --dark-accent2: #ff8906;    /* Orange accent */
+            --dark-accent3: #f9bc60;    /* Gold accent */
+            --dark-border: #332940;     /* Purple-tinged border */
+            --dark-hover: #242438;      /* Hover state color */
+        }
+        
+        /* Discover Page Specific Styles */
+        .discover-hero {
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            background-image: url('/BG_discover.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .discover-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+        
+        .discover-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .discover-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            line-height: 1.2;
+        }
+        
+        .discover-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary-light);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+        
+        .features-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 3rem;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotate(15deg) scale(1.1);
+            background-color: var(--accent1);
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .feature-desc {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .stats-section {
+            padding: 5rem 0;
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .stat-box {
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-light);
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .testimonials {
+            padding: 5rem 0;
+            background-color: #f8f9fa;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 20px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: rgba(0,184,169,0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        body.dark-mode header {
+            background-color: var(--dark-card);
+            border-bottom-color: var(--dark-primary);
+        }
+        
+        body.dark-mode .logo-text {
+            color: var(--dark-text);
+        }
+        
+        body.dark-mode nav ul li a {
+            color: var(--dark-text);
+        }
+        
+        body.dark-mode nav ul li a.active {
+            color: var(--dark-primary);
+        }
+        
+        body.dark-mode nav ul li a.active::after {
+            background-color: var(--dark-primary);
+        }
+        
+        body.dark-mode .search-box {
+            background-color: var(--dark-card);
+            border: 1px solid var(--dark-border);
+        }
+        
+        body.dark-mode .search-box input {
+            color: var(--dark-text);
+        }
+        
+        body.dark-mode .sign-up-btn {
+            background-color: var(--dark-primary);
+            color: var(--dark-text);
+        }
+        
+        body.dark-mode .discover-hero {
+            min-height: 550px;
+            background-image: url('/BG_discover.jpeg');
+        }
+        
+        body.dark-mode .discover-hero::before {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+        
+        body.dark-mode .discover-title {
+            color: white;
+        }
+        
+        body.dark-mode .discover-subtitle {
+            color: var(--dark-primary-light);
+        }
+        
+        body.dark-mode .cta-button.primary {
+            background-color: var(--dark-primary);
+            color: white;
+        }
+        
+        body.dark-mode .cta-button.secondary {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+        }
+        
+        body.dark-mode .features-section {
+            background-color: var(--dark-bg);
+        }
+        
+        body.dark-mode .feature-card {
+            background-color: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        body.dark-mode .feature-title {
+            color: var(--dark-primary-light);
+        }
+        
+        body.dark-mode .feature-desc {
+            color: #b8c2cc;
+        }
+        
+        body.dark-mode .testimonials {
+            background-color: var(--dark-card);
+        }
+        
+        body.dark-mode .testimonial-card {
+            background-color: var(--dark-card);
+            border: 1px solid var(--dark-border);
+        }
+        
+        body.dark-mode .testimonial-card::before {
+            color: rgba(127, 90, 240, 0.1);
+        }
+        
+        body.dark-mode .author-info h4 {
+            color: var(--dark-primary-light);
+        }
+        
+        body.dark-mode .author-info p {
+            color: #b8c2cc;
+        }
+        
+        body.dark-mode footer {
+            background-color: var(--dark-card);
+        }
+        
+        body.dark-mode .footer-column h3 {
+            color: var(--dark-primary-light);
+        }
+        
+        body.dark-mode .footer-column p,
+        body.dark-mode .footer-column ul li a {
+            color: #b8c2cc;
+        }
+        
+        body.dark-mode .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        body.dark-mode .social-links a {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--dark-text);
+        }
+        
+        body.dark-mode .social-links a:hover {
+            background-color: var(--dark-primary);
+        }
+        
+        body.dark-mode .copyright {
+            color: #aaa;
+            border-top-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .theme-toggle-container {
+            margin-left: 0;
+        }
+        
+        .dark-mode-toggle {
+            background: transparent;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode-toggle:hover {
+            background: rgba(127, 90, 240, 0.1);
+        }
+        
+        body.dark-mode .dark-mode-toggle:hover {
+            background: rgba(255, 193, 7, 0.1);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .header-actions {
+                order: 3;
+                width: 100%;
+                justify-content: flex-end;
+                margin-top: 15px;
+            }
+            
+            .search-box {
+                order: 4;
+                width: 100%;
+                margin-top: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .discover-title {
+                font-size: 2.2rem;
+            }
+            
+            .discover-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header-actions {
+                justify-content: space-between;
+            }
+            
+            .sign-up-btn {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+        }
+
+        #img2{
+            width:100px;
+            height: 100px;;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+</head>
+<body>
+    <header style="background: linear-gradient(to right, #7aa6d2, #c4d8ed);">
+        <div class="container" >
+            <div class="header-content">
+                <a href="home.html" class="logo">
+                    <img src="train.png" alt="Trackwise Logo" id="img2">
+                    <span class="logo-text">Trackwise</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="discoverviolet.html" class="active"><i class="fas fa-compass"></i> Discover</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search trains or stations...">
+                </div>
+                
+                
+                <a href="signup.html" class="sign-up-btn"><i class="fas fa-user-plus"></i> Sign up</a>
+                <div class="theme-toggle-container">
+                    <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                        <span class="toggle-icon">
+                            <i class="fas fa-moon light-icon"></i>
+                            <i class="fas fa-sun dark-icon"></i>
+                        </span>
+                    </button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="discover-hero">
+        <div class="discover-hero-content">
+            <h1 class="discover-title">Discover Trackwise</h1>
+            <p class="discover-subtitle">Explore the powerful features that make rail travel smarter and more predictable</p>
+            <div class="cta-container">
+                <a href="#" class="cta-button primary"><i class="fas fa-play-circle"></i> Watch Demo</a>
+                <a href="\Trackwise_Documentation.pdf" class="cta-button secondary"><i class="fas fa-book"></i> Read Documentation</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <p class="section-subtitle">Trackwise combines real-time data with predictive analytics to revolutionize your train travel experience</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">Real-time Updates</h3>
+                    <p class="feature-desc">Get live train positions, speeds, and estimated arrival times updated every 30 seconds from our nationwide sensor network.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">AI Predictions</h3>
+                    <p class="feature-desc">Our machine learning models analyze historical data and current conditions to forecast delays with 92% accuracy.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3 class="feature-title">Smart Alerts</h3>
+                    <p class="feature-desc">Personalized notifications for delays, platform changes, and connection risks based on your specific journey.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3 class="feature-title">Route Optimization</h3>
+                    <p class="feature-desc">Find the fastest or most reliable routes considering real-time conditions and predicted delays.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Crowd Prediction</h3>
+                    <p class="feature-desc">See predicted coach occupancy levels to choose less crowded trains or find available seats.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Station Navigation</h3>
+                    <p class="feature-desc">Interactive 3D maps of major stations with amenities, predicted platform changes, and walking routes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Trackwise in Numbers</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">The impact we're making across India's rail network</p>
+            
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Trains Tracked Daily</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">92%</div>
+                    <div class="stat-label">Prediction Accuracy</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">5M+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">45</div>
+                    <div class="stat-label">Major Stations Covered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <p class="section-subtitle">Hear from travelers who've transformed their rail journeys with Trackwise</p>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">Trackwise saved me from missing an important meeting by accurately predicting a 45-minute delay and suggesting an alternative train that got me there on time. The platform is incredibly accurate and easy to use.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rahul Sharma" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Rahul Sharma</h4>
+                            <p>Frequent Traveler, Delhi</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">As someone who travels weekly for work, Trackwise has become indispensable. The real-time updates and delay predictions help me plan my schedule perfectly. The crowd prediction feature is a game-changer!</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Priya Patel" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Priya Patel</h4>
+                            <p>Business Consultant, Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">I was skeptical about the predictions at first, but after using Trackwise for three months, I'm amazed at how accurate they are. It's reduced my station waiting time by at least 30 minutes per trip.</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Arjun Mehta" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Arjun Mehta</h4>
+                            <p>College Student, Bangalore</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Trackwise</h3>
+                    <p>Making rail travel easier and more predictable across India with our advanced scheduling and forecasting technology.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="discover.html"><i class="fas fa-chevron-right"></i> Discover</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Book Tickets</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> PNR Status</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Train Schedule</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Railway Nagar, New Delhi, India</a></li>
+                        <li><a href="mailto:info@trackwise.com"><i class="fas fa-envelope"></i> info@trackwise.com</a></li>
+                        <li><a href="tel:+911234567890"><i class="fas fa-phone"></i> +91 12345 67890</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> 24/7 Customer Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Trackwise. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> for train travelers
+            </div>
+        </div>
+    </footer>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        // Dark Mode Toggle Functionality
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Check for saved preference or system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+        }
+        
+        // Toggle dark mode
+        darkModeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+            
+            // Add animation class
+            this.classList.add('toggle-animate');
+            setTimeout(() => {
+                this.classList.remove('toggle-animate');
+            }, 300);
+        });
+        
+        // Testimonial slider and back to top button
+        $(document).ready(function(){
+            $('.testimonial-slider').slick({
+                dots: false,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                arrows: false
+            });
+            
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

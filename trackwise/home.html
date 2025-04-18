@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trackwise - Train Scheduling and Forecasting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="dark-mode.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <a href="#" class="logo">
+        <img src="train.png" alt="Trackwise Logo" id="logoimg">
+        <span id="textTrac">Trackwise</span>
+      </a>
+      <nav class="nav-links">
+        <ul>
+          <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="discoverviolet.html"><i class="fas fa-compass"></i> Discover</a></li>
+          <li><a href="\trackwise\bookings\book.html"><i class="fas fa-ticket-alt"></i> Book</a></li>
+          <li><a href="status/status.html"><i class="fas fa-train"></i> Status</a></li>
+          <li><a href="\trackwise\pnr\pnr.html"><i class="fas fa-search"></i> PNR</a></li>
+          <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a href="\trackwise\contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search trains or stations...">
+      </div>
+
+      <div class="header-actions">
+        <a href="signup.html" class="sign-up-btn"><i class="fas fa-user-plus"></i> Sign up</a>
+        <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">On Track, On Time</h1>
+                <h2 class="hero-subtitle">Your Journey, Our Priority!</h2>
+                <p class="hero-text">Real-time tracking for 10,000+ trains across India with accurate delay predictions and smart scheduling.</p>
+                <div class="cta-container">
+                    <a href="/trackwise/bookings/book.html" class="cta-button primary"><i class="fas fa-ticket-alt"></i> Book Tickets</a>
+                    <a href="track.html" class="cta-button secondary"><i class="fas fa-train"></i> Track Train</a>
+                </div>
+                <p class="promo-text"><i class="fas fa-gift"></i> Get 10% off on your first booking! Use code: TRACKWISE10</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Everything you need for a smooth rail journey with accurate predictions and real-time updates</p>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--primary);">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <h3 class="service-title">Live Tracking</h3>
+                    <p class="service-desc">Real-time location updates for all trains with predictive arrival times using advanced algorithms</p>
+                    <div class="service-wave" style="background-color: var(--primary);"></div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--accent1);">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3 class="service-title">Travel Alerts</h3>
+                    <p class="service-desc">Instant notifications for delays, cancellations and platform changes based on our forecasting system</p>
+                    <div class="service-wave" style="background-color: var(--accent1);"></div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--accent2);">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="service-title">Platform Status</h3>
+                    <p class="service-desc">Know your platform before arrival with live station maps and predicted platform changes</p>
+                    <div class="service-wave" style="background-color: var(--accent2);"></div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--accent3);">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="service-title">Schedule Planner</h3>
+                    <p class="service-desc">Smart journey planning with optimal routes and connections using historical delay data</p>
+                    <div class="service-wave" style="background-color: var(--accent3);"></div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--primary-light);">
+                        <i class="fas fa-directions"></i>
+                    </div>
+                    <h3 class="service-title">Station Navigation</h3>
+                    <p class="service-desc">Interactive maps for all major stations with amenities and predicted crowd levels</p>
+                    <div class="service-wave" style="background-color: var(--primary-light);"></div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon" style="background-color: var(--secondary);">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="service-title">24/7 Support</h3>
+                    <p class="service-desc">Dedicated customer support anytime, anywhere with AI-powered assistance</p>
+                    <div class="service-wave" style="background-color: var(--secondary);"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="dashboard">
+        <div class="container">
+            <h2 class="section-title">Live Train Dashboard</h2>
+            <p class="section-subtitle">Track real-time train status and schedules with our predictive analytics</p>
+            
+            <div class="dashboard-stats-horizontal">
+                <div class="stat-item">
+                    <div class="stat-number">124 <i class="fas fa-train"></i></div>
+                    <div class="stat-title">Active Trains</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">92% <i class="fas fa-check-circle"></i></div>
+                    <div class="stat-title">On-Time Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">7 min <i class="fas fa-clock"></i></div>
+                    <div class="stat-title">Avg. Delay</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">45.2K <i class="fas fa-users"></i></div>
+                    <div class="stat-title">Daily Passengers</div>
+                </div>
+            </div>
+            
+            <div class="dashboard-filters">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search trains by number or route..." id="searchInput">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="on-time">On Time</button>
+                    <button class="filter-btn" data-filter="delayed">Delayed</button>
+                    <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+                </div>
+            </div>
+            
+            <div class="dashboard-cards" id="trainCards">
+                <!-- Train Card 1 -->
+                <div class="train-card" data-status="on-time">
+                    <div class="train-header">
+                        <div class="train-number">XP1234</div>
+                        <span class="status-pill status-on-time"><i class="fas fa-check-circle"></i> On Time</span>
+                    </div>
+                    <div class="train-route">
+                        <div class="route-stations">
+                            <span><i class="fas fa-map-marker-alt"></i> New Delhi</span>
+                            <span><i class="fas fa-flag"></i> Mumbai</span>
+                        </div>
+                        <div class="route-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                    </div>
+                    <div class="train-timing">
+                        <div class="timing-box">
+                            <div class="timing-label">Departure</div>
+                            <div class="timing-value">07:30</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Arrival</div>
+                            <div class="timing-value">15:45</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Duration</div>
+                            <div class="timing-value">8h 15m</div>
+                        </div>
+                    </div>
+                    <div class="train-footer">
+                        <button class="btn-details" data-id="XP1234"><i class="fas fa-info-circle"></i> View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Train Card 2 -->
+                <div class="train-card" data-status="delayed">
+                    <div class="train-header">
+                        <div class="train-number">RC5678</div>
+                        <span class="status-pill status-delayed"><i class="fas fa-clock"></i> Delayed 25m</span>
+                    </div>
+                    <div class="train-route">
+                        <div class="route-stations">
+                            <span><i class="fas fa-map-marker-alt"></i> Chennai</span>
+                            <span><i class="fas fa-flag"></i> Bangalore</span>
+                        </div>
+                        <div class="route-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                    </div>
+                    <div class="train-timing">
+                        <div class="timing-box">
+                            <div class="timing-label">Departure</div>
+                            <div class="timing-value">08:15</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Arrival</div>
+                            <div class="timing-value">12:30</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Duration</div>
+                            <div class="timing-value">4h 15m</div>
+                        </div>
+                    </div>
+                    <div class="train-footer">
+                        <button class="btn-details" data-id="RC5678"><i class="fas fa-info-circle"></i> View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Train Card 3 -->
+                <div class="train-card" data-status="on-time">
+                    <div class="train-header">
+                        <div class="train-number">LC7890</div>
+                        <span class="status-pill status-on-time"><i class="fas fa-check-circle"></i> On Time</span>
+                    </div>
+                    <div class="train-route">
+                        <div class="route-stations">
+                            <span><i class="fas fa-map-marker-alt"></i> Kolkata</span>
+                            <span><i class="fas fa-flag"></i> Delhi</span>
+                        </div>
+                        <div class="route-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                    </div>
+                    <div class="train-timing">
+                        <div class="timing-box">
+                            <div class="timing-label">Departure</div>
+                            <div class="timing-value">06:00</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Arrival</div>
+                            <div class="timing-value">14:15</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Duration</div>
+                            <div class="timing-value">8h 15m</div>
+                        </div>
+                    </div>
+                    <div class="train-footer">
+                        <button class="btn-details" data-id="LC7890"><i class="fas fa-info-circle"></i> View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Train Card 4 -->
+                <div class="train-card" data-status="cancelled">
+                    <div class="train-header">
+                        <div class="train-number">AC4567</div>
+                        <span class="status-pill status-cancelled"><i class="fas fa-times-circle"></i> Cancelled</span>
+                    </div>
+                    <div class="train-route">
+                        <div class="route-stations">
+                            <span><i class="fas fa-map-marker-alt"></i> Mumbai</span>
+                            <span><i class="fas fa-flag"></i> Goa</span>
+                        </div>
+                        <div class="route-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                    </div>
+                    <div class="train-timing">
+                        <div class="timing-box">
+                            <div class="timing-label">Departure</div>
+                            <div class="timing-value">09:00</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Arrival</div>
+                            <div class="timing-value">16:30</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Duration</div>
+                            <div class="timing-value">7h 30m</div>
+                        </div>
+                    </div>
+                    <div class="train-footer">
+                        <button class="btn-details" data-id="AC4567"><i class="fas fa-info-circle"></i> View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Train Card 5 -->
+                <div class="train-card" data-status="on-time">
+                    <div class="train-header">
+                        <div class="train-number">BR2210</div>
+                        <span class="status-pill status-on-time"><i class="fas fa-check-circle"></i> On Time</span>
+                    </div>
+                    <div class="train-route">
+                        <div class="route-stations">
+                            <span><i class="fas fa-map-marker-alt"></i> Bangalore</span>
+                            <span><i class="fas fa-flag"></i> Chennai</span>
+                        </div>
+                        <div class="route-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                    </div>
+                    <div class="train-timing">
+                        <div class="timing-box">
+                            <div class="timing-label">Departure</div>
+                            <div class="timing-value">10:30</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Arrival</div>
+                            <div class="timing-value">14:45</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Duration</div>
+                            <div class="timing-value">4h 15m</div>
+                        </div>
+                    </div>
+                    <div class="train-footer">
+                        <button class="btn-details" data-id="BR2210"><i class="fas fa-info-circle"></i> View Details</button>
+                    </div>
+                </div>
+                
+                <!-- Train Card 6 -->
+                <div class="train-card" data-status="delayed">
+                    <div class="train-header">
+                        <div class="train-number">HYD345</div>
+                        <span class="status-pill status-delayed"><i class="fas fa-clock"></i> Delayed 15m</span>
+                    </div>
+                    <div class="train-route">
+                        <div class="route-stations">
+                            <span><i class="fas fa-map-marker-alt"></i> Hyderabad</span>
+                            <span><i class="fas fa-flag"></i> Bangalore</span>
+                        </div>
+                        <div class="route-arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+                    </div>
+                    <div class="train-timing">
+                        <div class="timing-box">
+                            <div class="timing-label">Departure</div>
+                            <div class="timing-value">11:15</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Arrival</div>
+                            <div class="timing-value">17:30</div>
+                        </div>
+                        <div class="timing-box">
+                            <div class="timing-label">Duration</div>
+                            <div class="timing-value">6h 15m</div>
+                        </div>
+                    </div>
+                    <div class="train-footer">
+                        <button class="btn-details" data-id="HYD345"><i class="fas fa-info-circle"></i> View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map section -->
+            <div class="card" style="margin-top: 30px;">
+                <div class="card-header">
+                    <h2 class="card-title">Live Train Tracking</h2>
+                </div>
+                <div id="train-map" style="height: 500px; width: 100%; border-radius: 10px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="delay-forecast">
+        <div class="container1">
+            <div class="section1">
+                <div class="section1-title"><i class="fas fa-chart-line"></i> Delay Forecasts</div>
+                
+                <div class="delay-item">
+                    <div class="route"><i class="fas fa-route"></i> New Delhi to Mumbai</div>
+                    <div class="on-time high-percentage"><i class="fas fa-check-circle"></i> 92% On Time</div>
+                </div>
+                
+                <div class="delay-item">
+                    <div class="route"><i class="fas fa-route"></i> Chennai to Bangalore</div>
+                    <div class="on-time low-percentage"><i class="fas fa-exclamation-circle"></i> 45% On Time</div>
+                </div>
+                
+                <div class="delay-item">
+                    <div class="route"><i class="fas fa-route"></i> Kolkata to Delhi</div>
+                    <div class="on-time high-percentage"><i class="fas fa-check-circle"></i> 88% On Time</div>
+                </div>
+                
+                <div class="delay-item">
+                    <div class="route"><i class="fas fa-route"></i> Mumbai to Goa</div>
+                    <div class="on-time medium-percentage"><i class="fas fa-clock"></i> 62% On Time</div>
+                </div>
+            </div>
+            
+            <div class="section1">
+                <div class="section1-title"><i class="fas fa-search"></i> Quick Train Search</div>
+                
+                <form class="search-form">
+                    <div class="form-group">
+                        <label for="origin"><i class="fas fa-map-marker-alt"></i> Origin Station</label>
+                        <select id="origin">
+                            <option value="" selected disabled>Select origin</option>
+                            <option value="delhi">New Delhi</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="chennai">Chennai</option>
+                            <option value="bangalore">Bangalore</option>
+                            <option value="kolkata">Kolkata</option>
+                            <option value="hyderabad">Hyderabad</option>
+                            <option value="goa">Goa</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="destination"><i class="fas fa-flag"></i> Destination Station</label>
+                        <select id="destination">
+                            <option value="" selected disabled>Select destination</option>
+                            <option value="delhi">New Delhi</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="chennai">Chennai</option>
+                            <option value="bangalore">Bangalore</option>
+                            <option value="kolkata">Kolkata</option>
+                            <option value="hyderabad">Hyderabad</option>
+                            <option value="goa">Goa</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date"><i class="fas fa-calendar-day"></i> Date</label>
+                        <input type="text" id="date" placeholder="dd-mm-yyyy">
+                    </div>
+                    
+                    <button type="submit" class="search-btn"><i class="fas fa-search"></i> Search Trains</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <section class="destinations">
+        <div class="container">
+            <h2 class="section-title">Popular Destinations In India</h2>
+            <p class="section-subtitle">Explore India's most beautiful destinations by train with our recommended routes</p>
+                                
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <img src="\trackwise\assets\Mumbai.jpg" alt="Mumbai" class="destination-img">
+                    <div class="destination-overlay">
+                        <h3>Mumbai</h3>
+                        <p>Gateway of India, Marine Drive, Bollywood</p>
+                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="assets/Thetaj.jpg" alt="Agra" class="destination-img">
+                    <div class="destination-overlay">
+                        <h3>Agra</h3>
+                        <p>Taj Mahal, Agra Fort, Fatehpur Sikri</p>
+                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Kolkata" class="destination-img">
+                    <div class="destination-overlay">
+                        <h3>Kolkata</h3>
+                        <p>Howrah Bridge, Victoria Memorial, Park Street</p>
+                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="assets/jaipur.jpg" alt="Jaipur" class="destination-img">
+                    <div class="destination-overlay">
+                        <h3>Jaipur</h3>
+                        <p>Hawa Mahal, Amber Fort, City Palace</p>
+                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="assets/goa.jpg" alt="Goa" class="destination-img">
+                    <div class="destination-overlay">
+                        <h3>Goa</h3>
+                        <p>Beaches, Portuguese architecture, Nightlife</p>
+                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="assets/varanasi.jpg" alt="Varanasi" class="destination-img">
+                    <div class="destination-overlay">
+                        <h3>Varanasi</h3>
+                        <p>Ghats, Kashi Vishwanath Temple, Ganga Aarti</p>
+                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Trackwise</h3>
+                    <p>Making rail travel easier and more predictable across India with our advanced scheduling and forecasting technology.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Live Status</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Book Tickets</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> PNR Status</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Train Schedule</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Railway Nagar, New Delhi, India</a></li>
+                        <li><a href="mailto:info@trackwise.com"><i class="fas fa-envelope"></i> info@trackwise.com</a></li>
+                        <li><a href="tel:+911234567890"><i class="fas fa-phone"></i> +91 12345 67890</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> 24/7 Customer Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Trackwise. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> for train travelers
+            </div>
+        </div>
+    </footer>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+  // Initialize the map centered over India (or your preferred area)
+  var map = L.map('train-map').setView([22.9734, 78.6569], 5);
+
+  // Add OpenStreetMap layer
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Example: Add train station marker
+  var station = L.marker([28.6139, 77.2090]).addTo(map);
+  station.bindPopup("<b>New Delhi Station</b>").openPopup();
+
+  // Example: Add a train route polyline
+  var route = [
+    [28.6139, 77.2090], // New Delhi
+    [26.9124, 75.7873], // Jaipur
+    [23.0225, 72.5714]  // Ahmedabad
+  ];
+  L.polyline(route, { color: 'blue' }).addTo(map);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter buttons functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    const cards = document.querySelectorAll('.train-card');
+                    
+                    cards.forEach(card => {
+                        if (filter === 'all' || card.dataset.status === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const cards = document.querySelectorAll('.train-card');
+                
+                cards.forEach(card => {
+                    const trainNumber = card.querySelector('.train-number').textContent.toLowerCase();
+                    const stations = card.querySelector('.route-stations').textContent.toLowerCase();
+                    
+                    if (trainNumber.includes(searchTerm) || stations.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Card hover effects
+            const cards = document.querySelectorAll('.train-card, .service-card, .destination-card, .section1');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+
+            // Add floating animation to service cards
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.animation = 'float 3s ease-in-out infinite';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.animation = '';
+                });
+            });
+
+            // Back to top button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Simple form submission handler
+            document.querySelector('.search-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const origin = document.getElementById('origin').value;
+                const destination = document.getElementById('destination').value;
+                const date = document.getElementById('date').value;
+                
+                if (!origin || !destination || !date) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                // In a real application, this would make an API call
+                alert(`Searching trains from ${origin} to ${destination} on ${date}`);
+            });
+            
+            // Date input formatting (simple version)
+            document.getElementById('date').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '-' + value.substring(2);
+                }
+                if (value.length > 5) {
+                    value = value.substring(0, 5) + '-' + value.substring(5, 9);
+                }
+                
+                e.target.value = value;
+            });
+            
+            // View details button click
+            document.querySelectorAll('.btn-details').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const trainId = this.getAttribute('data-id');
+                    alert(`Showing details for train ${trainId}`);
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop();
+        const navLinks = document.querySelectorAll('nav ul li a');
+        
+        navLinks.forEach(link => {
+            const linkPage = link.getAttribute('href').split('/').pop();
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    });
+
+   
+    // Dark Mode Toggle Functionality - This should be consistent across all pages
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Function to apply dark mode
+    function applyDarkMode(isDark) {
+        if (isDark) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    }
+
+    // Check for saved preference or system preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+        applyDarkMode(true);
+    }
+
+    // Toggle dark mode - this will affect all pages
+    darkModeToggle.addEventListener('click', function() {
+        const isDarkMode = !document.body.classList.contains('dark-mode');
+        applyDarkMode(isDarkMode);
+        
+        // Store the preference in localStorage
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        
+        // Add animation class
+        this.classList.add('toggle-animate');
+        setTimeout(() => {
+            this.classList.remove('toggle-animate');
+        }, 300);
+    });
+
+    // Add this to all connected pages to maintain consistency
+    window.addEventListener('storage', function(event) {
+        if (event.key === 'theme') {
+            applyDarkMode(event.newValue === 'dark');
+        }
+    });
+</script>
+
+    
+</body>
+</html>

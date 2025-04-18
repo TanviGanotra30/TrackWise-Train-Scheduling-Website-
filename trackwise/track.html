@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Track Train - Trackwise</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+    .header {
+      background: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    #map {
+      height: 80vh;
+      width: 100%;
+    }
+    .search-container {
+      margin: 1rem;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Track Your Train</h1>
+    <p>Real-time simulation on map</p>
+  </div>
+
+  <div class="search-container">
+    <input type="text" id="trainInput" placeholder="Enter Train Number">
+    <button onclick="startTracking()">Track</button>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const route = [
+      { city: "New Delhi", lat: 28.6139, lng: 77.2090 },
+      { city: "Agra", lat: 27.1767, lng: 78.0081 },
+      { city: "Kanpur", lat: 26.4499, lng: 80.3319 },
+      { city: "Lucknow", lat: 26.8467, lng: 80.9462 }
+    ];
+
+    let map = L.map('map').setView([28.6139, 77.2090], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const trainIcon = L.icon({
+      iconUrl: 'https://cdn-icons-png.flaticon.com/512/34/34627.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32]
+    });
+
+    let marker = L.marker([28.6139, 77.2090], { icon: trainIcon }).addTo(map)
+      .bindPopup("Train is starting from New Delhi")
+      .openPopup();
+
+    let index = 0;
+    let interval;
+
+    function moveTrain() {
+      if (index >= route.length) {
+        clearInterval(interval);
+        marker.bindPopup("Train has reached final destination.").openPopup();
+        return;
+      }
+
+      const { lat, lng, city } = route[index];
+      marker.setLatLng([lat, lng]);
+      map.setView([lat, lng], 7);
+      marker.bindPopup(`Train is now near ${city}`).openPopup();
+      index++;
+    }
+
+    function startTracking() {
+      const trainNo = document.getElementById('trainInput').value;
+      if (!trainNo) {
+        alert("Please enter a Train Number");
+        return;
+      }
+
+      alert(`Tracking train number: ${trainNo}`);
+      index = 0;
+      clearInterval(interval);
+      moveTrain(); // Start immediately
+      interval = setInterval(moveTrain, 4000); // move every 4 seconds
+    }
+  </script>
+</body>
+</html>

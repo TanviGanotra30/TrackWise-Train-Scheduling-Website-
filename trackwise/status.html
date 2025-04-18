@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="status-checker">
+    <h2>Check Train Status</h2>
+    <input type="text" id="trainNumberInput" placeholder="Enter Train Number">
+    <button onclick="checkTrainStatus()">Search</button>
+    
+    <div id="trainStatusResult" style="margin-top: 20px;">
+      <!-- Results will appear here -->
+    </div>
+  </div>
+  
+  <script>
+  async function checkTrainStatus() {
+    const trainNumber = document.getElementById("trainNumberInput").value;
+    if (!trainNumber) return alert("Please enter a train number");
+    
+    const response = await fetch(`get_train_status.php?train=${trainNumber}`);
+    const data = await response.json();
+    
+    if (data.error) {
+      document.getElementById("trainStatusResult").innerHTML = `
+        <div class="error">${data.error}</div>
+      `;
+    } else {
+      document.getElementById("trainStatusResult").innerHTML = `
+        <div class="train-card">
+          <h3>${data.train_name} (${data.train_number})</h3>
+          <p>Current Station: ${data.station_name}</p>
+          <p>Status: <span class="${data.status === 'On Time' ? 'on-time' : 'delayed'}">
+            ${data.status} ${data.delay_minutes > 0 ? `(${data.delay_minutes} mins)` : ''}
+          </span></p>
+          <p>Last Update: ${data.last_update}</p>
+        </div>
+      `;
+    }
+  }
+  </script>
+  </body>
+  </html>

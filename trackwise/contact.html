@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Trackwise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="dark-mode.css">
+    <style>
+        /* Reuse all the existing styles from the home page */
+        /* Only adding new styles specific to the Contact page */
+        
+        :root {
+            --primary: #00B8A9;
+            --primary-light: #5CD6CC;
+            --secondary: #2D4059;
+            --accent1: #FF7043;
+            --accent2: #5C6BC0;
+            --accent3: #26A69A;
+            --light: #F5F5F5;
+            --dark: #333;
+            --gray: #777;
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --danger: #F44336;
+        }
+        
+        .contact-hero {
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+        
+        .contact-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .contact-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            line-height: 1.2;
+        }
+        
+        .contact-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary-light);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+        
+        .contact-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 50px;
+            margin-top: 3rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form-container {
+            flex: 1;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-title i {
+            color: var(--primary);
+        }
+        
+        .info-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .info-item i {
+            color: var(--primary);
+            margin-top: 3px;
+        }
+        
+        .info-text {
+            flex: 1;
+        }
+        
+        .info-text h4 {
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .info-text p, .info-text a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .info-text a:hover {
+            color: var(--primary);
+        }
+        
+        .contact-form {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0,184,169,0.2);
+        }
+        
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-container {
+            margin-top: 30px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+        
+        .faq-section {
+            padding: 5rem 0;
+            background-color: #f8f9fa;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #f5f5f5;
+        }
+        
+        .faq-question i {
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question {
+            background: #f5f5f5;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+        
+        @media (max-width: 992px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-info, .contact-form-container {
+                flex: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-title {
+                font-size: 2.2rem;
+            }
+            
+            .contact-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+        /* Dark Mode Specific Styles for Contact Page */
+.dark-mode .contact-section {
+    background-color: #1a1a1a !important;
+}
+
+.dark-mode .contact-form,
+.dark-mode .info-card {
+    background-color: #2d2d2d !important;
+    border-color: #3d3d3d !important;
+}
+
+.dark-mode .info-title,
+.dark-mode .info-text h4,
+.dark-mode .form-group label {
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .info-text p,
+.dark-mode .info-text a,
+.dark-mode .faq-question {
+    color: #b0b0b0 !important;
+}
+
+.dark-mode .info-text a:hover {
+    color: var(--primary-light) !important;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group textarea,
+.dark-mode .form-group select {
+    background-color: #3d3d3d !important;
+    border-color: #4d4d4d !important;
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .form-group input:focus,
+.dark-mode .form-group textarea:focus,
+.dark-mode .form-group select:focus {
+    box-shadow: 0 0 0 3px rgba(92, 214, 204, 0.2) !important;
+}
+
+
+.dark-mode .map-container {
+    filter: brightness(0.8) contrast(1.1);
+}
+
+.dark-mode .section-title,
+.dark-mode .section-subtitle {
+    color: #f0f0f0 !important;
+}
+
+/* Header and footer dark mode styles */
+.dark-mode header {
+    background-color: rgba(30, 30, 30, 0.95) !important;
+    border-bottom-color: var(--primary) !important;
+}
+
+.dark-mode .search-box input {
+    background-color: #3d3d3d !important;
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .sign-up-btn {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+/* Add these to your existing styles */
+body, .info-card, .contact-form, .faq-item, header, footer {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    transition: all 0.3s ease;
+}
+
+/* Dark mode toggle animation */
+.toggle-animate {
+    animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Enhanced Dark Mode Styles for FAQ Section */
+.dark-mode .faq-section {
+    background-color: #1a1a1a !important;
+}
+
+.dark-mode .faq-item {
+    background-color: #2d2d2d !important;
+    border: 1px solid #3d3d3d !important;
+}
+
+.dark-mode .faq-question {
+    color: #f0f0f0 !important;
+    background-color: #2d2d2d !important;
+}
+
+.dark-mode .faq-question:hover,
+.dark-mode .faq-item.active .faq-question {
+    background-color: #3a3a3a !important;
+}
+
+.dark-mode .faq-answer {
+    color: #e0e0e0 !important;
+    background-color: #2d2d2d !important;
+    border-top: 1px solid #3d3d3d !important;
+}
+
+.dark-mode .faq-question i {
+    color: var(--primary-light) !important;
+}
+
+/* Make the active FAQ item stand out slightly more */
+.dark-mode .faq-item.active {
+    box-shadow: 0 2px 8px rgba(0, 184, 169, 0.2) !important;
+}
+
+/* Improve text contrast */
+.dark-mode .faq-answer p {
+    color: #d0d0d0 !important;
+}
+/* Add these transition effects */
+.faq-item {
+    transition: all 0.3s ease;
+}
+
+.faq-question, .faq-answer {
+    transition: all 0.3s ease;
+}
+
+#img4{
+    height: 100px;
+    width: 100px;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="home.html" class="logo">
+                    <img src="train.png" alt="Trackwise Logo" id="img4">
+                    <span class="logo-text">Trackwise</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="discoverviolet.html"><i class="fas fa-compass"></i> Discover</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search trains or stations...">
+                </div>
+               
+                <a href="signup.html" class="sign-up-btn"><i class="fas fa-user-plus"></i> Sign up</a>
+                <div class="theme-toggle-container">
+                    <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                        <span class="toggle-icon">
+                            <i class="fas fa-moon light-icon"></i>
+                            <i class="fas fa-sun dark-icon"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="contact-hero">
+        <div class="contact-hero-content">
+            <h1 class="contact-title">Get In Touch</h1>
+            <p class="contact-subtitle">We'd love to hear from you! Reach out for support, partnerships, or just to say hello.</p>
+            <div class="cta-container">
+                <a href="#contact" class="cta-button primary"><i class="fas fa-envelope"></i> Send Message</a>
+                <a href="#faq" class="cta-button secondary"><i class="fas fa-question-circle"></i> View FAQs</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">Have questions or feedback? We're here to help 24/7</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3 class="info-title"><i class="fas fa-headset"></i> Support</h3>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div class="info-text">
+                                <h4>24/7 Helpline</h4>
+                                <a href="tel:+9118001234567">+91 1800 123 4567</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="info-text">
+                                <h4>Email Support</h4>
+                                <a href="mailto:support@trackwise.com">support@trackwise.com</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-comments"></i>
+                            <div class="info-text">
+                                <h4>Live Chat</h4>
+                                <p>Available in the Trackwise app</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3 class="info-title"><i class="fas fa-building"></i> Headquarters</h3>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="info-text">
+                                <h4>Address</h4>
+                                <p>123 Railway Nagar, New Delhi 110001, India</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="info-text">
+                                <h4>Office Hours</h4>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-subway"></i>
+                            <div class="info-text">
+                                <h4>Nearest Station</h4>
+                                <p>New Delhi Railway Station (1km)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3 class="info-title"><i class="fas fa-handshake"></i> Partnerships</h3>
+                        <div class="info-item">
+                            <i class="fas fa-briefcase"></i>
+                            <div class="info-text">
+                                <h4>Business Inquiries</h4>
+                                <a href="mailto:partners@trackwise.com">partners@trackwise.com</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-newspaper"></i>
+                            <div class="info-text">
+                                <h4>Media Relations</h4>
+                                <a href="mailto:press@trackwise.com">press@trackwise.com</a>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-users"></i>
+                            <div class="info-text">
+                                <h4>Careers</h4>
+                                <a href="mailto:careers@trackwise.com">careers@trackwise.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Enter your phone number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" required>
+                                <option value="" disabled selected>Select a subject</option>
+                                <option value="support">Technical Support</option>
+                                <option value="feedback">Product Feedback</option>
+                                <option value="partnership">Partnership Inquiry</option>
+                                <option value="press">Press Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" placeholder="How can we help you?" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+                    </form>
+                    
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.715532933539!2d77.2205143150831!3d28.64263598241691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393c3f1!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1624457356781!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Quick answers to common questions about Trackwise</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How accurate are Trackwise's delay predictions?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our predictions currently have a 92% accuracy rate for delays over 15 minutes. Accuracy varies by route and time of day, with our machine learning models constantly improving as we process more data. For the most reliable predictions, check within 2 hours of departure when we incorporate real-time conditions.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is Trackwise officially partnered with Indian Railways?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we have an official data-sharing partnership with Indian Railways since January 2021. This allows us access to real-time operational data while providing them with our predictive analytics to improve scheduling efficiency.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How often is train location data updated?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For most major routes, we update train positions every 30-60 seconds. In remote areas with limited connectivity, updates may be less frequent (2-5 minutes). Our system clearly indicates when data was last refreshed for each train.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I book tickets through Trackwise?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, we focus on tracking and prediction services. However, we do provide direct links to IRCTC for ticket booking, and our premium plans include booking assistance with our partner agencies.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How does Trackwise make money?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer premium subscription plans with advanced features for frequent travelers. We also work with corporate clients and railway operators who license our predictive technology. Advertising and affiliate partnerships supplement our revenue while keeping the basic service free for users.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What makes Trackwise different from other train tracking apps?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our unique advantage is predictive analytics - we don't just show current status but forecast future delays. We also provide station navigation, crowd predictions, and connection risk assessments. Our AI models are trained on 5+ years of historical data specific to Indian rail conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Reuse the same footer from the home page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Trackwise</h3>
+                    <p>Making rail travel easier and more predictable across India with our advanced scheduling and forecasting technology.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="discover.html"><i class="fas fa-chevron-right"></i> Discover</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Book Tickets</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> PNR Status</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Train Schedule</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Railway Nagar, New Delhi, India</a></li>
+                        <li><a href="mailto:info@trackwise.com"><i class="fas fa-envelope"></i> info@trackwise.com</a></li>
+                        <li><a href="tel:+911234567890"><i class="fas fa-phone"></i> +91 12345 67890</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> 24/7 Customer Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Trackwise. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> for train travelers
+            </div>
+        </div>
+    </footer>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ toggle functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Form submission
+            const contactForm = document.querySelector('.contact-form');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // In a real application, this would send the form data to a server
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
+            });
+            
+            // Back to top button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+// Dark Mode Toggle Functionality - Enhanced version
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+// Function to apply dark mode consistently
+function applyDarkMode(isDark) {
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+        // Update icon state
+        darkModeToggle.querySelector('.light-icon').style.display = 'none';
+        darkModeToggle.querySelector('.dark-icon').style.display = 'inline-block';
+    } else {
+        document.body.classList.remove('dark-mode');
+        // Update icon state
+        darkModeToggle.querySelector('.light-icon').style.display = 'inline-block';
+        darkModeToggle.querySelector('.dark-icon').style.display = 'none';
+    }
+}
+
+// Initialize dark mode based on preference
+function initDarkMode() {
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+        applyDarkMode(true);
+    } else {
+        applyDarkMode(false);
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initDarkMode);
+
+// Toggle dark mode
+darkModeToggle.addEventListener('click', function() {
+    const isDarkMode = !document.body.classList.contains('dark-mode');
+    applyDarkMode(isDarkMode);
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    
+    // Add animation class
+    this.classList.add('toggle-animate');
+    setTimeout(() => {
+        this.classList.remove('toggle-animate');
+    }, 300);
+});
+
+// Sync across tabs
+window.addEventListener('storage', function(event) {
+    if (event.key === 'theme') {
+        applyDarkMode(event.newValue === 'dark');
+    }
+});
+    </script>
+     
+</body>
+</html>

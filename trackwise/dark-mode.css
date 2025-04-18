@@ -1,0 +1,92 @@
+/* ===== Light Mode (Default) ===== */
+:root {
+    /* Your original light colors */
+    --primary: #00B8A9;
+    --primary-light: #5CD6CC;
+    --secondary: #2D4059;
+    --accent1: #FF7043;
+    --accent2: #5C6BC0;
+    --accent3: #26A69A;
+    --light: #F5F5F5;
+    --dark: #333;
+    --gray: #777;
+  }
+  
+  /* ===== Dark Mode (Your Colors) ===== */
+  .dark-mode {
+    /* Your exact dark mode colors */
+    --dark-bg: #0f0e17;
+    --dark-card: #1a1a2e;
+    --dark-text: #fffffe;
+    --dark-primary: #7f5af0;
+    --dark-primary-light: #a78bfa;
+    --dark-secondary: #2cb67d;
+    --dark-accent1: #ff8ba7;
+    --dark-accent2: #ff8906;
+    --dark-accent3: #f9bc60;
+    --dark-border: #332940;
+    --dark-hover: #242438;
+  
+    /* Component mapping */
+    --bg-color: var(--dark-bg);
+    --text-color: var(--dark-text);
+    --card-bg: var(--dark-card);
+    --header-bg: var(--dark-card);
+    --footer-bg: var(--dark-card);
+    --primary: var(--dark-primary);
+    --primary-light: var(--dark-primary-light);
+    --secondary: var(--dark-secondary);
+    --accent1: var(--dark-accent1);
+    --accent2: var(--dark-accent2);
+    --accent3: var(--dark-accent3);
+    --border-color: var(--dark-border);
+  }
+  
+  /* ===== Base Styles ===== */
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+  
+  /* Header */
+  header {
+    background-color: var(--header-bg);
+    border-bottom: 3px solid var(--primary);
+  }
+  
+  /* Cards */
+  .card, .feature-card, .testimonial-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+  }
+  
+  /* Buttons */
+  .cta-button.primary {
+    background-color: var(--primary);
+  }
+
+  /* ===== Dark Mode Adjustments ===== */
+.dark-mode {
+    /* Your exact color variables */
+    --dark-bg: #0f0e17;
+    --dark-card: #1a1a2e;
+    --dark-text: #fffffe;
+    --dark-primary: #7f5af0;
+    --dark-primary-light: #a78bfa;
+    --dark-secondary: #2cb67d; /* This is the green you want to replace */
+    --dark-accent1: #ff8ba7;
+    --dark-accent2: #ff8906;
+    --dark-accent3: #f9bc60;
+    
+    /* Force stats section to use dark-card color instead of green */
+    --stats-bg: var(--dark-card); /* NEW: Replaces the green */
+  }
+  
+  /* Stats Section - Now uses your dark-card color */
+  .stats-section {
+    background-color: var(--stats-bg) !important; /* Overrides any existing green */
+  }
+
+
+  

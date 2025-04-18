@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="pnr-checker">
+    <h2>Check PNR Status</h2>
+    <input type="text" id="pnrInput" placeholder="Enter PNR Number">
+    <button onclick="checkPNRStatus()">Search</button>
+    
+    <div id="pnrResult" style="margin-top: 20px;"></div>
+  </div>
+  
+  <script>
+  async function checkPNRStatus() {
+    const pnr = document.getElementById("pnrInput").value;
+    if (!pnr) return alert("Please enter PNR");
+    
+    const response = await fetch(`get_pnr_status.php?pnr=${pnr}`);
+    const data = await response.json();
+    
+    if (data.error) {
+      document.getElementById("pnrResult").innerHTML = `
+        <div class="error">${data.error}</div>
+      `;
+    } else {
+      document.getElementById("pnrResult").innerHTML = `
+        <div class="pnr-card">
+          <h3>PNR: ${data.pnr_number}</h3>
+          <p>Train: ${data.train_name} (${data.train_number})</p>
+          <p>From: ${data.from_station} → To: ${data.to_station}</p>
+          <p>Date: ${data.journey_date}</p>
+          <p>Coach: ${data.coach_type} | Seat: ${data.seat_number}</p>
+          <p>Status: <span class="${data.booking_status.toLowerCase()}">
+            ${data.booking_status}
+          </span></p>
+        </div>
+      `;
+    }
+  }
+  </script>
+</body>
+</html>
+  

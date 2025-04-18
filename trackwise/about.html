@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Trackwise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="dark-mode.css">
+    <style>
+        /* Reuse all the existing styles from the home page */
+        /* Only adding new styles specific to the About page */
+        
+        :root {
+            --primary: #00B8A9;
+            --primary-light: #5CD6CC;
+            --secondary: #2D4059;
+            --accent1: #FF7043;
+            --accent2: #5C6BC0;
+            --accent3: #26A69A;
+            --light: #F5F5F5;
+            --dark: #333;
+            --gray: #777;
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --danger: #F44336;
+        }
+        
+        .about-hero {
+            /* height: 80vh; */
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+        
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .about-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            line-height: 1.2;
+        }
+        
+        .about-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: var(--primary-light);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+        
+        .mission-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .mission-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-top: 3rem;
+        }
+        
+        .mission-text {
+            flex: 1;
+        }
+        
+        .mission-image {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .mission-image img {
+            width: 100%;
+            height: 700px;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .mission-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .values-section {
+            padding: 5rem 0;
+            background-color: #f8f9fa;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+        
+        .value-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover .value-icon {
+            background-color: var(--accent1);
+            transform: rotate(15deg);
+        }
+        
+        .value-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .value-desc {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .team-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .team-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 20px;
+        }
+        
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .team-role {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .team-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .team-social a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .timeline-section {
+            padding: 5rem 0;
+            background-color: #f8f9fa;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .timeline-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .timeline-desc {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .mission-content {
+                flex-direction: column;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+        }
+
+        /* Dark Mode Specific Styles for About Page */
+.dark-mode .mission-section {
+    background-color: #1a1a1a !important;
+}
+
+.dark-mode .mission-text p {
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .values-section {
+    background-color: #222 !important;
+}
+
+.dark-mode .value-card {
+    background-color: #2d2d2d !important;
+}
+
+.dark-mode .value-desc {
+    color: #b0b0b0 !important;
+}
+
+.dark-mode .team-section {
+    background-color: #1a1a1a !important;
+}
+
+.dark-mode .team-card {
+    background-color: #2d2d2d !important;
+}
+
+.dark-mode .team-name {
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .timeline-section {
+    background-color: #222 !important;
+}
+
+.dark-mode .timeline-content {
+    background-color: #2d2d2d !important;
+}
+
+.dark-mode .timeline-title {
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .timeline-desc {
+    color: #b0b0b0 !important;
+}
+
+.dark-mode .section-title,
+.dark-mode .section-subtitle {
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .team-role {
+    color: var(--primary-light) !important;
+}
+
+.dark-mode .timeline-date {
+    color: var(--primary-light) !important;
+}
+
+.dark-mode .team-social a {
+    background-color: #3d3d3d !important;
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .team-social a:hover {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+
+
+/* Dark Mode Toggle Styles */
+.dark-mode-toggle .dark-icon {
+    display: none;
+}
+
+.dark-mode .dark-mode-toggle .light-icon {
+    display: none;
+}
+
+.dark-mode .dark-mode-toggle .dark-icon {
+    display: inline-block;
+}
+
+.dark-mode .mission-text p {
+    color: #e0e0e0 !important;
+    opacity: 0.9;
+}
+
+#img3{
+    height: 100px;
+    width: 100px;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <img src="train.png" alt="Trackwise Logo" id="img3">
+                    <span class="logo-text">Trackwise</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="discoverviolet.html"><i class="fas fa-compass"></i> Discover</a></li>
+                        <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search trains or stations...">
+                </div>
+                
+                    
+                <a href="signup.html" class="sign-up-btn"><i class="fas fa-user-plus"></i> Sign up</a>
+                <div class="theme-toggle-container">
+                    <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+                        <span class="toggle-icon">
+                            <i class="fas fa-moon light-icon"></i>
+                            <i class="fas fa-sun dark-icon"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <h1 class="about-title">Our Story</h1>
+            <p class="about-subtitle">Transforming rail travel through innovation and technology</p>
+            <div class="cta-container">
+                <a href="#mission" class="cta-button primary"><i class="fas fa-arrow-down"></i> Learn More</a>
+                <a href="contact.html" class="cta-button secondary"><i class="fas fa-paper-plane"></i> Contact Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="mission-section" id="mission">
+        <div class="container">
+            <h2 class="section-title">Our Mission</h2>
+            <p class="section-subtitle">We're on a journey to make rail travel predictable, efficient, and stress-free for millions of Indians</p>
+            
+            <div class="mission-content">
+                <div class="mission-text">
+                    <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.7;">Trackwise was founded in 2018 with a simple goal: to eliminate the uncertainty of train travel in India. After experiencing one too many unexpected delays and missed connections, our founders set out to create a solution that would empower travelers with accurate, real-time information.</p>
+                    
+                    <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.7;">Today, we combine cutting-edge AI with a vast network of data sources to provide the most accurate train tracking and delay prediction system in the country. Our technology analyzes historical patterns, real-time conditions, and hundreds of other variables to give you reliable forecasts.</p>
+                    
+                    <p style="margin-bottom: 20px; font-size: 1.1rem; line-height: 1.7;">We're proud to serve over 5 million travelers monthly and partner with Indian Railways to improve operational efficiency. But most importantly, we're proud to give passengers back one of their most precious resources: time.</p>
+                </div>
+                <div class="mission-image">
+                    <img src="assets/about_train.jpg" alt="Trackwise Team">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="values-section">
+        <div class="container">
+            <h2 class="section-title">Our Values</h2>
+            <p class="section-subtitle">The principles that guide everything we do at Trackwise</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="value-title">Accuracy</h3>
+                    <p class="value-desc">We're obsessed with precision. Our algorithms are constantly refined to deliver the most reliable predictions possible.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="value-title">Empathy</h3>
+                    <p class="value-desc">We understand the stress of uncertain travel. Our solutions are designed with real passenger needs in mind.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-desc">We push boundaries in predictive analytics to solve problems others consider too complex.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="value-title">Integrity</h3>
+                    <p class="value-desc">We're transparent about our data sources and prediction methods, building trust with our users.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="value-title">Collaboration</h3>
+                    <p class="value-desc">We work closely with Indian Railways and other partners to improve the system for everyone.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="value-title">Ambition</h3>
+                    <p class="value-desc">We dream big. Our vision is to transform rail travel across the entire subcontinent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <p class="section-subtitle">The brilliant minds powering Trackwise's predictive technology</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="assets/person.jpg" alt="Rajiv Kapoor" class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Hargun</h3>
+                        <p class="team-role">Student at Lovely Professional University</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <img src="assets/person.jpg" alt="Priya Sharma" class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Minha</h3>
+                        <p class="team-role">Student at Lovely Professional University</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <img src="assets/person.jpg" alt="Arjun Patel" class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Shrijal</h3>
+                        <p class="team-role">Student at Lovely Professional University</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card">
+                    <img src="assets/person.jpg" alt="Neha Gupta" class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Tanvi</h3>
+                        <p class="team-role">Student at Lovely Professional University</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Our Journey</h2>
+            <p class="section-subtitle">Key milestones in Trackwise's growth story</p>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">June 2018</div>
+                        <h3 class="timeline-title">Company Founded</h3>
+                        <p class="timeline-desc">Trackwise incorporated with a small team of 5 people working out of a co-working space in Bangalore.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">March 2019</div>
+                        <h3 class="timeline-title">First Prediction Algorithm</h3>
+                        <p class="timeline-desc">Launched our first delay prediction model for the Delhi-Mumbai route with 78% accuracy.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">November 2019</div>
+                        <h3 class="timeline-title">Seed Funding</h3>
+                        <p class="timeline-desc">Raised $2M in seed funding to expand our data collection network and engineering team.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">July 2020</div>
+                        <h3 class="timeline-title">Mobile App Launch</h3>
+                        <p class="timeline-desc">Released our iOS and Android apps, reaching 100,000 downloads in the first month.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-date">January 2021</div>
+                        <h3 class="timeline-title">Railways Partnership</h3>
+                        <p class="timeline-desc">Formal partnership with Indian Railways to integrate our predictive systems into their operations.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Present Day</div>
+                        <h3 class="timeline-title">National Coverage</h3>
+                        <p class="timeline-desc">Now tracking 10,000+ trains daily with 92% prediction accuracy and 5 million active users.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Reuse the same footer from the home page -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Trackwise</h3>
+                    <p>Making rail travel easier and more predictable across India with our advanced scheduling and forecasting technology.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="discover.html"><i class="fas fa-chevron-right"></i> Discover</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Book Tickets</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> PNR Status</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Train Schedule</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Railway Nagar, New Delhi, India</a></li>
+                        <li><a href="mailto:info@trackwise.com"><i class="fas fa-envelope"></i> info@trackwise.com</a></li>
+                        <li><a href="tel:+911234567890"><i class="fas fa-phone"></i> +91 12345 67890</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> 24/7 Customer Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Trackwise. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> for train travelers
+            </div>
+        </div>
+    </footer>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Back to top button
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+   // Dark Mode Toggle Functionality - This should be consistent across all pages
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+// Function to apply dark mode
+function applyDarkMode(isDark) {
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+        // Update icon state
+        darkModeToggle.querySelector('.light-icon').style.display = 'none';
+        darkModeToggle.querySelector('.dark-icon').style.display = 'inline-block';
+    } else {
+        document.body.classList.remove('dark-mode');
+        // Update icon state
+        darkModeToggle.querySelector('.light-icon').style.display = 'inline-block';
+        darkModeToggle.querySelector('.dark-icon').style.display = 'none';
+    }
+}
+
+// Check for saved preference or system preference
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+    applyDarkMode(true);
+} else {
+    applyDarkMode(false);
+}
+
+// Toggle dark mode - this will affect all pages
+darkModeToggle.addEventListener('click', function() {
+    const isDarkMode = !document.body.classList.contains('dark-mode');
+    applyDarkMode(isDarkMode);
+    
+    // Store the preference in localStorage
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    
+    // Add animation class
+    this.classList.add('toggle-animate');
+    setTimeout(() => {
+        this.classList.remove('toggle-animate');
+    }, 300);
+});
+
+// Add this to all connected pages to maintain consistency
+window.addEventListener('storage', function(event) {
+    if (event.key === 'theme') {
+        applyDarkMode(event.newValue === 'dark');
+    }
+});
+    </script>
+</body>
+</html>

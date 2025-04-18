@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PNR Status | Trackwise</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="dark-mode.css">
+  <link rel="stylesheet" href="home.css">
+  <style>
+    :root {
+      --primary: #3498db; /* Blue color for light mode */
+      --secondary: #6a5acd; /* Violet color for dark mode */
+      --accent: #ff6b6b;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --text-light: #f8f9fa;
+      --text-dark: #2c3e50; /* Dark blue text for light mode */
+      --bg-light: #f0f8ff; /* Alice blue background for light mode */
+      --bg-dark: #1a1a2e; /* Dark violet background */
+      --card-bg-light: #ffffff;
+      --card-bg-dark: #16213e; /* Slightly lighter than bg for cards */
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .dark-mode h1 {
+      color: var(--secondary);
+    }
+    
+    .card {
+      background: var(--card-bg-light);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode .card {
+      background: var(--card-bg-dark);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .input-group {
+      margin-bottom: 20px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .dark-mode .input-group label {
+      color: var(--secondary);
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background-color: var(--card-bg-light);
+      color: var(--text-dark);
+    }
+    
+    .dark-mode .input-group input {
+      background-color: #16213e;
+      border-color: #2a3a5e;
+      color: var(--text-light);
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+    
+    .dark-mode .input-group input:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.3);
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 25px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .dark-mode .btn {
+      background-color: var(--secondary);
+    }
+    
+    .btn:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .dark-mode .btn:hover {
+      background-color: #5a4acd;
+    }
+    
+    .result-card {
+      background: var(--card-bg-light);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .dark-mode .result-card {
+      background: var(--card-bg-dark);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .result-card h3 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .dark-mode .result-card h3 {
+      color: var(--secondary);
+      border-bottom-color: #2a3a5e;
+    }
+    
+    .result-card p {
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+    
+    .dark-mode .result-card p {
+      color: var(--text-light);
+    }
+    
+    .result-card strong {
+      color: var(--primary);
+      min-width: 120px;
+      display: inline-block;
+    }
+    
+    .dark-mode .result-card strong {
+      color: var(--secondary);
+    }
+    
+    .status-confirmed {
+      color: var(--success);
+      font-weight: 600;
+    }
+    
+    .status-waiting {
+      color: var(--warning);
+      font-weight: 600;
+    }
+    
+    .status-cancelled {
+      color: var(--danger);
+      font-weight: 600;
+    }
+    
+    .spinner {
+      display: none;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px auto;
+        padding: 15px;
+      }
+      
+      .card, .result-card {
+        padding: 20px;
+      }
+    }
+
+    /* Dark Mode Toggle Styles */
+    .dark-mode-toggle {
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 5px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode-toggle:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+    
+    .dark-mode .dark-mode-toggle:hover {
+      background-color: rgba(106, 90, 205, 0.1);
+    }
+    
+    .dark-mode-toggle .dark-icon {
+      display: none;
+    }
+    
+    .dark-mode .dark-mode-toggle .light-icon {
+      display: none;
+    }
+    
+    .dark-mode .dark-mode-toggle .dark-icon {
+      display: inline-block;
+    }
+    .dark-mode{
+      background-color: #2a3a5e;
+    }
+    
+    .theme-toggle-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="theme-toggle-container">
+      <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+          <span class="toggle-icon">
+              <i class="fas fa-moon light-icon"></i>
+              <i class="fas fa-sun dark-icon"></i>
+          </span>
+      </button>
+    </div>
+    <h1><i class="fas fa-search"></i> PNR Status Check</h1>
+    
+    <div class="card">
+      <div class="input-group">
+        <label for="pnrInput">Enter 10-digit PNR Number</label>
+        <input type="text" id="pnrInput" placeholder="e.g., 1234567890" maxlength="10" pattern="[0-9]{10}" required>
+      </div>
+      <button id="checkPnrBtn" class="btn">
+        <i class="fas fa-check-circle"></i> Check Status
+        <div class="spinner" id="loadingSpinner"></div>
+      </button>
+    </div>
+
+    <div id="pnrResult" class="result-card">
+      <h3><i class="fas fa-ticket-alt"></i> PNR: <span id="pnrNumber"></span></h3>
+      <p><strong>Train:</strong> <span id="trainInfo"></span></p>
+      <p><strong>Route:</strong> <span id="routeInfo"></span></p>
+      <p><strong>Journey Date:</strong> <span id="journeyDate"></span></p>
+      <p><strong>Class:</strong> <span id="coachClass"></span></p>
+      <p><strong>Seat/Berth:</strong> <span id="seatBerth"></span></p>
+      <p><strong>Status:</strong> <span id="bookingStatus"></span></p>
+      <p><strong>Chart Status:</strong> <span id="chartStatus"></span></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('checkPnrBtn').addEventListener('click', function() {
+      const pnrInput = document.getElementById('pnrInput').value.trim();
+      const btn = document.getElementById('checkPnrBtn');
+      const spinner = document.getElementById('loadingSpinner');
+      
+      // Validate PNR
+      if (!pnrInput || !/^\d{10}$/.test(pnrInput)) {
+        alert('Please enter a valid 10-digit PNR number');
+        return;
+      }
+      
+      // Show loading state
+      btn.disabled = true;
+      spinner.style.display = 'block';
+      btn.querySelector('i').style.display = 'none';
+      
+      // Simulate API call with timeout
+      setTimeout(() => {
+        try {
+          // Generate mock data based on PNR
+          const statusTypes = ['Confirmed', 'Waitlisted', 'RAC', 'Cancelled'];
+          const randomStatus = statusTypes[Math.floor(Math.random() * statusTypes.length)];
+          const chartStatus = Math.random() > 0.5 ? 'Prepared' : 'Not Prepared';
+          
+          // Update UI with results
+          document.getElementById('pnrNumber').textContent = pnrInput;
+          document.getElementById('trainInfo').textContent = `12${pnrInput.slice(0,3)} ${getRandomTrainName()}`;
+          document.getElementById('routeInfo').textContent = `${getRandomStation()} to ${getRandomStation()}`;
+          document.getElementById('journeyDate').textContent = formatDate(new Date(Date.now() + Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000));
+          document.getElementById('coachClass').textContent = getRandomCoachClass();
+          document.getElementById('seatBerth').textContent = randomStatus === 'Confirmed' ? 
+            `B${Math.floor(Math.random() * 10) + 1}/${Math.floor(Math.random() * 70) + 1} (${['Lower', 'Middle', 'Upper', 'Side Lower', 'Side Upper'][Math.floor(Math.random() * 5)]})` : 
+            '--';
+          
+          // Set status with appropriate class
+          const statusElement = document.getElementById('bookingStatus');
+          statusElement.textContent = randomStatus;
+          statusElement.className = `status-${randomStatus.toLowerCase()}`;
+          
+          document.getElementById('chartStatus').textContent = chartStatus;
+          document.getElementById('chartStatus').className = chartStatus === 'Prepared' ? 'status-confirmed' : 'status-waiting';
+          
+          // Show result card
+          document.getElementById('pnrResult').style.display = 'block';
+          
+        } catch (error) {
+          console.error('Error checking PNR:', error);
+          alert('Error checking PNR status. Please try again.');
+        } finally {
+          // Reset button state
+          btn.disabled = false;
+          spinner.style.display = 'none';
+          btn.querySelector('i').style.display = 'inline-block';
+        }
+      }, 1500);
+    });
+    
+    // Helper functions
+    function getRandomTrainName() {
+      const names = [
+        'Rajdhani Express',
+        'Shatabdi Express',
+        'Duronto Express',
+        'Garib Rath',
+        'Sampark Kranti',
+        'Jan Shatabdi',
+        'Vande Bharat',
+        'Gatimaan Express'
+      ];
+      return names[Math.floor(Math.random() * names.length)];
+    }
+    
+    function getRandomStation() {
+      const stations = [
+        'New Delhi (NDLS)',
+        'Mumbai CST (CSTM)',
+        'Chennai Central (MAS)',
+        'Howrah Junction (HWH)',
+        'Bangalore City (SBC)',
+        'Secunderabad Junction (SC)',
+        'Ahmedabad Junction (ADI)',
+        'Patna Junction (PNBE)'
+      ];
+      return stations[Math.floor(Math.random() * stations.length)];
+    }
+    
+    function getRandomCoachClass() {
+      const classes = [
+        'Sleeper (SL)',
+        'AC 3 Tier (3A)',
+        'AC 2 Tier (2A)',
+        'AC First Class (1A)',
+        'Second Sitting (2S)',
+        'Executive Class (EC)'
+      ];
+      return classes[Math.floor(Math.random() * classes.length)];
+    }
+    
+    function formatDate(date) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return date.toLocaleDateString('en-US', options);
+    }
+
+    // Dark Mode Toggle Functionality
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Function to apply dark mode
+    function applyDarkMode(isDark) {
+      if (isDark) {
+        document.body.classList.add('dark-mode');
+        // Update icon state
+        darkModeToggle.querySelector('.light-icon').style.display = 'none';
+        darkModeToggle.querySelector('.dark-icon').style.display = 'inline-block';
+      } else {
+        document.body.classList.remove('dark-mode');
+        // Update icon state
+        darkModeToggle.querySelector('.light-icon').style.display = 'inline-block';
+        darkModeToggle.querySelector('.dark-icon').style.display = 'none';
+      }
+    }
+
+    // Check for saved preference or system preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+      applyDarkMode(true);
+    } else {
+      applyDarkMode(false);
+    }
+
+    // Toggle dark mode
+    darkModeToggle.addEventListener('click', function() {
+      const isDarkMode = !document.body.classList.contains('dark-mode');
+      applyDarkMode(isDarkMode);
+      
+      // Store the preference in localStorage
+      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+      
+      // Add animation class
+      this.classList.add('toggle-animate');
+      setTimeout(() => {
+        this.classList.remove('toggle-animate');
+      }, 300);
+    });
+
+    // Add this to all connected pages to maintain consistency
+    window.addEventListener('storage', function(event) {
+      if (event.key === 'theme') {
+        applyDarkMode(event.newValue === 'dark');
+      }
+    });
+  </script>
+</body>
+</html>
