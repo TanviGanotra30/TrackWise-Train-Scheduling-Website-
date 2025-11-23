@@ -32,7 +32,7 @@
             color: white;
             position: relative;
             overflow: hidden;
-            background-image: url('/BG_discover.jpeg');
+            background-image: url('./assets/BG_discover.jpeg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -70,7 +70,20 @@
             color: var(--primary-light);
             text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
         }
+
+        #img2{
+            width:100px;
+            height: 100px;;
+        }
+
+        header{
+            background: linear-gradient(to right, #7aa6d2, #c4d8ed);
+        }
         
+        body.dark-mode header {
+        background: black;
+        }
+
         .features-section {
             padding: 5rem 0;
             background-color: white;
@@ -266,7 +279,7 @@
         
         body.dark-mode .discover-hero {
             min-height: 550px;
-            background-image: url('/BG_discover.jpeg');
+            background-image: url('./assets/BG_discover.jpeg');
         }
         
         body.dark-mode .discover-hero::before {
@@ -435,15 +448,11 @@
             }
         }
 
-        #img2{
-            width:100px;
-            height: 100px;;
-        }
     </style>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 </head>
 <body>
-    <header style="background: linear-gradient(to right, #7aa6d2, #c4d8ed);">
+    <header>
         <div class="container" >
             <div class="header-content">
                 <a href="home.html" class="logo">
@@ -484,7 +493,7 @@
             <p class="discover-subtitle">Explore the powerful features that make rail travel smarter and more predictable</p>
             <div class="cta-container">
                 <a href="#" class="cta-button primary"><i class="fas fa-play-circle"></i> Watch Demo</a>
-                <a href="\Trackwise_Documentation.pdf" class="cta-button secondary"><i class="fas fa-book"></i> Read Documentation</a>
+                <a href="./assets/Trackwise_Documentation.pdf" class="cta-button secondary"><i class="fas fa-book"></i> Read Documentation</a>
             </div>
         </div>
     </section>
@@ -723,6 +732,7 @@
                 });
             });
         });
+
     </script>
 </body>
 </html>

@@ -21,7 +21,7 @@
       </a>
       <nav class="nav-links">
         <ul>
-          <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="/trackwise/home.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="discoverviolet.html"><i class="fas fa-compass"></i> Discover</a></li>
           <li><a href="\trackwise\bookings\book.html"><i class="fas fa-ticket-alt"></i> Book</a></li>
           <li><a href="status/status.html"><i class="fas fa-train"></i> Status</a></li>
@@ -33,11 +33,13 @@
 
       <div class="search-box">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Search trains or stations...">
+        <input type="text" id="searchInput" placeholder="Search trains or stations...">
       </div>
+      
+      <div id="searchResults"></div>
 
       <div class="header-actions">
-        <a href="signup.html" class="sign-up-btn"><i class="fas fa-user-plus"></i> Sign up</a>
+        <a href="signup.html" class="sign-up-btn" id="sign"><i class="fas fa-user-plus"></i> Sign up</a>
         <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
           <i class="fas fa-moon"></i>
         </button>
@@ -194,7 +196,9 @@
                         </div>
                     </div>
                     <div class="train-footer">
-                        <button class="btn-details" data-id="XP1234"><i class="fas fa-info-circle"></i> View Details</button>
+                        <button class="btn-details" data-id="BR2210" onclick="window.location.href='/trackwise/pnr/pnr.html'">
+                            <i class="fas fa-info-circle"></i> View Details
+                          </button>
                     </div>
                 </div>
                 
@@ -226,7 +230,9 @@
                         </div>
                     </div>
                     <div class="train-footer">
-                        <button class="btn-details" data-id="RC5678"><i class="fas fa-info-circle"></i> View Details</button>
+                        <button class="btn-details" data-id="BR2210" onclick="window.location.href='/trackwise/pnr/pnr.html'">
+                            <i class="fas fa-info-circle"></i> View Details
+                          </button>
                     </div>
                 </div>
                 
@@ -258,7 +264,9 @@
                         </div>
                     </div>
                     <div class="train-footer">
-                        <button class="btn-details" data-id="LC7890"><i class="fas fa-info-circle"></i> View Details</button>
+                        <button class="btn-details" data-id="BR2210" onclick="window.location.href='/trackwise/pnr/pnr.html'">
+                            <i class="fas fa-info-circle"></i> View Details
+                          </button>
                     </div>
                 </div>
                 
@@ -290,7 +298,9 @@
                         </div>
                     </div>
                     <div class="train-footer">
-                        <button class="btn-details" data-id="AC4567"><i class="fas fa-info-circle"></i> View Details</button>
+                        <button class="btn-details" data-id="BR2210" onclick="window.location.href='/trackwise/pnr/pnr.html'">
+                            <i class="fas fa-info-circle"></i> View Details
+                          </button>
                     </div>
                 </div>
                 
@@ -322,10 +332,12 @@
                         </div>
                     </div>
                     <div class="train-footer">
-                        <button class="btn-details" data-id="BR2210"><i class="fas fa-info-circle"></i> View Details</button>
+                        <button class="btn-details" data-id="BR2210" onclick="window.location.href='/trackwise/pnr/pnr.html'">
+                            <i class="fas fa-info-circle"></i> View Details
+                          </button>
+                          
                     </div>
                 </div>
-                
                 <!-- Train Card 6 -->
                 <div class="train-card" data-status="delayed">
                     <div class="train-header">
@@ -354,7 +366,9 @@
                         </div>
                     </div>
                     <div class="train-footer">
-                        <button class="btn-details" data-id="HYD345"><i class="fas fa-info-circle"></i> View Details</button>
+                        <button class="btn-details" data-id="BR2210" onclick="window.location.href='/trackwise/pnr/pnr.html'">
+                            <i class="fas fa-info-circle"></i> View Details
+                          </button>
                     </div>
                 </div>
             </div>
@@ -449,7 +463,7 @@
                     <div class="destination-overlay">
                         <h3>Mumbai</h3>
                         <p>Gateway of India, Marine Drive, Bollywood</p>
-                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                        <a href="Explore.html" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
                     </div>
                 </div>
                 <div class="destination-card">
@@ -457,7 +471,7 @@
                     <div class="destination-overlay">
                         <h3>Agra</h3>
                         <p>Taj Mahal, Agra Fort, Fatehpur Sikri</p>
-                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                        <a href="Explore.html" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
                     </div>
                 </div>
                 <div class="destination-card">
@@ -465,7 +479,7 @@
                     <div class="destination-overlay">
                         <h3>Kolkata</h3>
                         <p>Howrah Bridge, Victoria Memorial, Park Street</p>
-                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                        <a href="Explore.html" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
                     </div>
                 </div>
                 <div class="destination-card">
@@ -473,7 +487,7 @@
                     <div class="destination-overlay">
                         <h3>Jaipur</h3>
                         <p>Hawa Mahal, Amber Fort, City Palace</p>
-                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                        <a href="Explore.html" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
                     </div>
                 </div>
                 <div class="destination-card">
@@ -481,7 +495,7 @@
                     <div class="destination-overlay">
                         <h3>Goa</h3>
                         <p>Beaches, Portuguese architecture, Nightlife</p>
-                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                        <a href="Explore.html" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
                     </div>
                 </div>
                 <div class="destination-card">
@@ -489,7 +503,7 @@
                     <div class="destination-overlay">
                         <h3>Varanasi</h3>
                         <p>Ghats, Kashi Vishwanath Temple, Ganga Aarti</p>
-                        <a href="#" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
+                        <a href="Explore.html" class="book-btn"><i class="fas fa-train"></i> Explore Trains</a>
                     </div>
                 </div>
             </div>
@@ -550,6 +564,40 @@
     </div>
     
     <script>
+  const trains = [
+    { name: "Rajdhani Express", from: "Delhi", to: "Mumbai", number: "12345" },
+    { name: "Shatabdi Express", from: "Delhi", to: "Chandigarh", number: "12011" },
+    { name: "Duronto Express", from: "Hyderabad", to: "Mumbai", number: "12220" },
+    { name: "Garib Rath", from: "Kolkata", to: "Delhi", number: "12203" },
+  ];
+
+  const input = document.getElementById('searchInput');
+
+  input.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // prevent form submission or page reload
+      const query = input.value.toLowerCase();
+      const results = trains.filter(train =>
+        train.name.toLowerCase().includes(query) ||
+        train.from.toLowerCase().includes(query) ||
+        train.to.toLowerCase().includes(query) ||
+        train.number.includes(query)
+      );
+
+      const output = results.map(train => `
+        <div class="result-card">
+          <h4>${train.name}</h4>
+          <p><strong>From:</strong> ${train.from}</p>
+          <p><strong>To:</strong> ${train.to}</p>
+          <p><strong>Train No:</strong> ${train.number}</p>
+        </div>
+      `).join('');
+
+      document.getElementById('searchResults').innerHTML = output || '<p style="color:white;">No results found.</p>';
+    }
+  });
+
+
   // Initialize the map centered over India (or your preferred area)
   var map = L.map('train-map').setView([22.9734, 78.6569], 5);
 
@@ -686,7 +734,7 @@
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
                     const trainId = this.getAttribute('data-id');
-                    alert(`Showing details for train ${trainId}`);
+                    // alert(`Showing details for train ${trainId}`);
                 });
             });
         });

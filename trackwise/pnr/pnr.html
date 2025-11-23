@@ -9,20 +9,26 @@
   <link rel="stylesheet" href="home.css">
   <style>
     :root {
-      --primary: #3498db; /* Blue color for light mode */
-      --secondary: #6a5acd; /* Violet color for dark mode */
-      --accent: #ff6b6b;
-      --light: #f8f9fa;
-      --dark: #343a40;
-      --success: #28a745;
-      --warning: #ffc107;
-      --danger: #dc3545;
-      --text-light: #f8f9fa;
-      --text-dark: #2c3e50; /* Dark blue text for light mode */
-      --bg-light: #f0f8ff; /* Alice blue background for light mode */
-      --bg-dark: #1a1a2e; /* Dark violet background */
+      --primary: #00B8A9;
+      --primary-light: #5CD6CC;
+      --secondary: #2D4059;
+      --accent1: #FF7043;
+      --accent2: #5C6BC0;
+      --accent3: #26A69A;
+      --light: #F5F5F5;
+      --dark: #333;
+      --gray: #777;
+      --success: #4CAF50;
+      --warning: #FFC107;
+      --danger: #F44336;
+      --text-light: #e6e6ff;
+      --text-dark: #2D4059;
+      --bg-light: #f0f8ff;
+      --bg-dark: #1a1a2e;
       --card-bg-light: #ffffff;
-      --card-bg-dark: #16213e; /* Slightly lighter than bg for cards */
+      --card-bg-dark: #16213e;
+      --header-bg-dark: rgba(26, 26, 46, 0.95);
+      --header-bg-light: rgba(255, 255, 255, 0.95);
     }
     
     * {
@@ -44,7 +50,217 @@
       color: var(--text-light);
     }
     
+    /* Header Styles - Matching Contact Page */
+    header {
+      background-color: var(--header-bg-light);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode header {
+      background-color: var(--header-bg-dark);
+      border-bottom-color: var(--primary);
+    }
+    
     .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--secondary);
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode .logo-text {
+      color: var(--text-light);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 25px;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode nav ul li a {
+      color: var(--text-light);
+    }
+    
+    nav ul li a:hover, nav ul li a.active {
+      color: var(--primary);
+    }
+
+    .dark-mode nav ul li a:hover, nav ul li a.active {
+      color: #7f5af0;
+    }
+    
+    nav ul li a i {
+      font-size: 0.9rem;
+    }
+    
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+      max-width: 400px;
+      margin: 0 20px;
+    }
+    
+    .search-box i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+    }
+    
+    .search-box input {
+      padding: 10px 15px 10px 40px;
+      border-radius: 30px;
+      border: 1px solid #ddd;
+      width: 100%;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode .search-box input {
+      background-color: #1e1e3a;
+      color: var(--text-light);
+      border-color: #3d3d6e;
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(85, 29, 89, 0.2);
+    }
+
+    .dark-mode search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(188, 84, 233, 0.2);
+    }
+    
+    .sign-up-btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      margin-left: auto;
+    }
+    
+    .sign-up-btn:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dark-mode .sign-up-btn {
+      background-color: #7f5af0;
+      color: white;
+    }
+    
+    /* Dark Mode Toggle Styles - Matching Contact Page */
+    .theme-toggle-container {
+      margin-left: 15px;
+    }
+    
+    .dark-mode-toggle {
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 5px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode-toggle:hover {
+      background-color: rgba(0, 184, 169, 0.1);
+    }
+    
+    .dark-mode .dark-mode-toggle {
+      color: #7f5af0;
+    }
+    
+    .dark-mode .dark-mode-toggle:hover {
+      background-color: rgba(92, 214, 204, 0.1);
+    }
+    
+    .dark-mode-toggle .light-icon {
+      display: inline-block;
+      color: #2cb67d;;
+    }
+    
+    .dark-mode-toggle .dark-icon {
+      display: none;
+      color: var(--accent1);
+    }
+    
+    .dark-mode .dark-mode-toggle .light-icon {
+      display: none;
+    }
+    
+    .dark-mode .dark-mode-toggle .dark-icon {
+      display: inline-block;
+    }
+    
+    /* Main Content Styles */
+    .pnr-container {
       max-width: 600px;
       margin: 40px auto;
       padding: 20px;
@@ -61,7 +277,7 @@
     }
     
     .dark-mode h1 {
-      color: var(--secondary);
+      color: #7f5af0;
     }
     
     .card {
@@ -71,11 +287,13 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       margin-bottom: 30px;
       transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.1);
     }
     
     .dark-mode .card {
-      background: var(--card-bg-dark);
+      background: var(--dark);
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border-color: rgba(255,255,255,0.1);
     }
     
     .input-group {
@@ -90,7 +308,7 @@
     }
     
     .dark-mode .input-group label {
-      color: var(--secondary);
+      color: #7f5af0;
     }
     
     .input-group input {
@@ -105,20 +323,20 @@
     }
     
     .dark-mode .input-group input {
-      background-color: #16213e;
-      border-color: #2a3a5e;
+      background-color: #1e1e3a;
+      border-color: #3d3d6e;
       color: var(--text-light);
     }
     
     .input-group input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+      box-shadow: 0 0 0 3px var(--card-bg-dark);
     }
     
     .dark-mode .input-group input:focus {
-      border-color: var(--secondary);
-      box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.3);
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(92, 214, 204, 0.3);
     }
     
     .btn {
@@ -138,17 +356,17 @@
     }
     
     .dark-mode .btn {
-      background-color: var(--secondary);
+      background-color: #7f5af0;
     }
     
     .btn:hover {
-      background-color: #2980b9;
+      background-color: var(--primary-light);
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     
     .dark-mode .btn:hover {
-      background-color: #5a4acd;
+      background-color: #7f5af0;
     }
     
     .result-card {
@@ -158,11 +376,13 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       display: none;
       animation: fadeIn 0.5s ease;
+      border: 1px solid rgba(0,0,0,0.1);
     }
     
     .dark-mode .result-card {
       background: var(--card-bg-dark);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px #7f5af0;
+      border-color: rgba(255,255,255,0.1);
     }
     
     @keyframes fadeIn {
@@ -181,7 +401,7 @@
     }
     
     .dark-mode .result-card h3 {
-      color: var(--secondary);
+      color: var(--primary-light);
       border-bottom-color: #2a3a5e;
     }
     
@@ -202,7 +422,7 @@
     }
     
     .dark-mode .result-card strong {
-      color: var(--secondary);
+      color: var(--primary-light);
     }
     
     .status-confirmed {
@@ -234,8 +454,229 @@
       to { transform: rotate(360deg); }
     }
     
+    /* Footer Styles - Matching Contact Page */
+    footer {
+      background-color: var(--light);
+      color: var(--dark);
+      padding: 60px 0 20px;
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode footer {
+      background-color: #1a1a1a;
+      color: var(--text-light);
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-column h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: var(--secondary);
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .dark-mode .footer-column h3 {
+      color: var(--text-light);
+    }
+    
+    .footer-column h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--primary);
+    }
+    
+    .footer-column p {
+      margin-bottom: 20px;
+      color: var(--gray);
+    }
+    
+    .dark-mode .footer-column p {
+      color: #b0b0d0;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #f0f0f0;
+      color: var(--secondary);
+      transition: all 0.3s ease;
+    }
+    
+    .dark-mode .social-links a {
+      background-color: #2d2d4d;
+      color: var(--text-light);
+    }
+    
+    .social-links a:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column ul li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-column ul li a {
+      color: var(--gray);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .dark-mode .footer-column ul li a {
+      color: #b0b0d0;
+    }
+    
+    .footer-column ul li a:hover {
+      color: var(--primary);
+      padding-left: 5px;
+    }
+    
+    .footer-column ul li a i {
+      font-size: 0.8rem;
+      color: var(--primary);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    
+    .dark-mode .copyright {
+      border-top-color: #3d3d3d;
+      color: #b0b0d0;
+    }
+    
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* Toggle Animation */
+    .toggle-animate {
+      animation: pulse 0.5s ease;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Responsive Styles - Matching Contact Page */
+    @media (max-width: 1200px) {
+      .search-box {
+        order: 3;
+        width: 100%;
+        margin: 15px 0 0;
+      }
+      
+      .search-box input {
+        width: 100%;
+      }
+      
+      .sign-up-btn {
+        margin-left: auto;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .header-content {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      
+      nav {
+        order: 1;
+        width: auto;
+        margin-top: 0;
+      }
+      
+      .search-box {
+        order: 2;
+        margin: 0;
+        flex: 1;
+        min-width: 200px;
+      }
+      
+      .theme-toggle-container {
+        margin-left: auto;
+      }
+    }
+    
     @media (max-width: 768px) {
-      .container {
+      .header-content {
+        gap: 10px;
+      }
+      
+      nav ul li {
+        margin-left: 10px;
+      }
+      
+      nav ul li a {
+        font-size: 0.9rem;
+      }
+      
+      .logo-text {
+        font-size: 1.2rem;
+      }
+      
+      .pnr-container {
         margin: 20px auto;
         padding: 15px;
       }
@@ -244,64 +685,87 @@
         padding: 20px;
       }
     }
-
-    /* Dark Mode Toggle Styles */
-    .dark-mode-toggle {
-      background: transparent;
-      border: none;
-      color: var(--primary);
-      cursor: pointer;
-      font-size: 1.2rem;
-      padding: 5px;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
     
-    .dark-mode-toggle:hover {
-      background-color: rgba(52, 152, 219, 0.1);
+    @media (max-width: 576px) {
+      .header-content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      
+      .logo {
+        order: 1;
+      }
+      
+      nav {
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
+      }
+      
+      nav ul {
+        justify-content: space-between;
+      }
+      
+      .search-box {
+        order: 2;
+        flex: none;
+        width: calc(100% - 120px);
+        margin: 0;
+      }
+      
+      .sign-up-btn {
+        order: 4;
+        margin-left: 0;
+      }
+      
+      .theme-toggle-container {
+        order: 5;
+        margin-left: 0;
+      }
     }
-    
-    .dark-mode .dark-mode-toggle:hover {
-      background-color: rgba(106, 90, 205, 0.1);
-    }
-    
-    .dark-mode-toggle .dark-icon {
-      display: none;
-    }
-    
-    .dark-mode .dark-mode-toggle .light-icon {
-      display: none;
-    }
-    
-    .dark-mode .dark-mode-toggle .dark-icon {
-      display: inline-block;
-    }
-    .dark-mode{
-      background-color: #2a3a5e;
-    }
-    
-    .theme-toggle-container {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 20px;
+    #img2{
+      height: 100px;
+      width: 100px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="theme-toggle-container">
-      <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-          <span class="toggle-icon">
+  <!-- Header Matching Contact Page -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="home.html" class="logo">
+          <img src="\trackwise\train.png" alt="Trackwise Logo" id="img2">
+          <span class="logo-text">Trackwise</span>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="/trackwise/home.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="\trackwise\discoverviolet.html"><i class="fas fa-compass"></i> Discover</a></li>
+            <li><a href="\trackwise\about.html"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="\trackwise\contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+          </ul>
+        </nav>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search trains or stations...">
+        </div>
+        <a href="\trackwise\signup.html" class="sign-up-btn"><i class="fas fa-user-plus"></i> Sign up</a>
+        <div class="theme-toggle-container">
+          <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <span class="toggle-icon">
               <i class="fas fa-moon light-icon"></i>
               <i class="fas fa-sun dark-icon"></i>
-          </span>
-      </button>
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
+  </header>
+
+  <!-- Main PNR Content -->
+  <div class="pnr-container">
     <h1><i class="fas fa-search"></i> PNR Status Check</h1>
     
     <div class="card">
@@ -325,6 +789,60 @@
       <p><strong>Status:</strong> <span id="bookingStatus"></span></p>
       <p><strong>Chart Status:</strong> <span id="chartStatus"></span></p>
     </div>
+  </div>
+
+  <!-- Footer Matching Contact Page -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Trackwise</h3>
+          <p>Making rail travel easier and more predictable across India with our advanced scheduling and forecasting technology.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="home.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="discoverviolet.html"><i class="fas fa-chevron-right"></i> Discover</a></li>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> Book Tickets</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> PNR Status</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Train Schedule</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Information</h3>
+          <ul>
+            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+            <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul>
+            <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Railway Nagar, New Delhi, India</a></li>
+            <li><a href="mailto:info@trackwise.com"><i class="fas fa-envelope"></i> info@trackwise.com</a></li>
+            <li><a href="tel:+911234567890"><i class="fas fa-phone"></i> +91 12345 67890</a></li>
+            <li><a href="#"><i class="fas fa-clock"></i> 24/7 Customer Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2023 Trackwise. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff4757;"></i> for train travelers
+      </div>
+    </div>
+  </footer>
+  
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
   </div>
 
   <script>
@@ -431,53 +949,66 @@
       return date.toLocaleDateString('en-US', options);
     }
 
-    // Dark Mode Toggle Functionality
+    // Dark Mode Toggle Functionality - Matching Contact Page
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
 
-    // Function to apply dark mode
     function applyDarkMode(isDark) {
       if (isDark) {
         document.body.classList.add('dark-mode');
-        // Update icon state
         darkModeToggle.querySelector('.light-icon').style.display = 'none';
         darkModeToggle.querySelector('.dark-icon').style.display = 'inline-block';
       } else {
         document.body.classList.remove('dark-mode');
-        // Update icon state
         darkModeToggle.querySelector('.light-icon').style.display = 'inline-block';
         darkModeToggle.querySelector('.dark-icon').style.display = 'none';
       }
     }
 
-    // Check for saved preference or system preference
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
-      applyDarkMode(true);
-    } else {
-      applyDarkMode(false);
+    function initDarkMode() {
+      const currentTheme = localStorage.getItem('theme');
+      if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+        applyDarkMode(true);
+      } else {
+        applyDarkMode(false);
+      }
     }
 
-    // Toggle dark mode
+    document.addEventListener('DOMContentLoaded', initDarkMode);
+
     darkModeToggle.addEventListener('click', function() {
       const isDarkMode = !document.body.classList.contains('dark-mode');
       applyDarkMode(isDarkMode);
-      
-      // Store the preference in localStorage
       localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
       
-      // Add animation class
       this.classList.add('toggle-animate');
       setTimeout(() => {
         this.classList.remove('toggle-animate');
       }, 300);
     });
 
-    // Add this to all connected pages to maintain consistency
     window.addEventListener('storage', function(event) {
       if (event.key === 'theme') {
         applyDarkMode(event.newValue === 'dark');
       }
+    });
+
+    // Back to top button functionality
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
   </script>
 </body>

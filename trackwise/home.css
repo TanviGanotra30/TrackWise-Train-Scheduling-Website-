@@ -1,9 +1,51 @@
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+
+  .search-box i {
+    margin-right: 10px;
+    color: #555;
+  }
+
+  .search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  #searchResults {
+    margin: 20px auto;
+    max-width: 500px;
+    color: #fff;
+  }
+
+  .result-card {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+
+
+
+
+
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: Arial, sans-serif;
 }
@@ -267,7 +309,7 @@ nav ul li a:not(.active):hover::after {
     color: white;
     position: relative;
     overflow: hidden;
-    background-image: url('/BG_home.jpeg');
+    background-image: url('./assets/BG_home.jpeg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1441,37 +1483,9 @@ body.dark-mode .sign-up-btn {
   box-shadow: 0 4px 15px rgba(127, 90, 240, 0.3);
 }
 
-/* Hero Section */
-/* body.dark-mode .hero {
-  background: linear-gradient(135deg, var(--dark-card) 0%, #161629 100%);
-}
 
-body.dark-mode .hero-title {
-  color: var(--dark-primary-light);
-}
-
-body.dark-mode .hero-subtitle {
-  color: var(--dark-text);
-}
-
-body.dark-mode .cta-button.primary {
-  background-color: var(--dark-primary);
-  color: var(--dark-text);
-  box-shadow: 0 4px 20px rgba(127, 90, 240, 0.4);
-}
-
-body.dark-mode .cta-button.secondary {
-  background-color: transparent;
-  color: var(--dark-primary);
-  border: 2px solid var(--dark-primary);
-}
-
-body.dark-mode .promo-text {
-  color: var(--dark-accent3);
-} */
-/* Replace the existing dark mode hero styles with this: */
 body.dark-mode .hero {
-    background-image: url('/BG_home.jpeg');
+    background-image: url('./assets/BG_home.jpeg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1601,20 +1615,6 @@ body.dark-mode .social-links a:hover {
   color: var(--dark-primary);
   transform: translateY(-3px);
 }
-
-/* Destination Cards */
-/* body.dark-mode .destination-overlay {
-  background: linear-gradient(to top, rgba(26, 26, 46, 0.9) 0%, transparent 100%);
-}
-
-body.dark-mode .destination-overlay h3 {
-  color: var(--dark-primary-light);
-}
-
-body.dark-mode .book-btn {
-  background-color: var(--dark-primary);
-  color: var(--dark-text);
-} */
 
 
 /* Dark mode styles for destinations section */
