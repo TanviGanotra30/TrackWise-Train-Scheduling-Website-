@@ -4,7 +4,7 @@ TrackWise is a modern, API-driven web platform designed to simplify railway trav
 
 Its goal is to provide travellers with a smart, intuitive, and reliable way to track trains with utmost accuracy.
 
-Live Link:https//track-wise-train-scheduling.vercel.app
+Live Link: https://track-wise-train-scheduling.vercel.app
 
 🚆 Why TrackWise?
 
